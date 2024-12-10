@@ -1,8 +1,9 @@
 # Nest-Network
 
+
 ## Database Schema Design
 
-`<insert database schema design here>`
+![db-schema](./images/db-screenshot.png)
 
 ## API Documentation
 
