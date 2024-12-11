@@ -4,7 +4,7 @@
 // Import environment variables
 const dotEnv = require('dotenv').config();
 
-console.log('Node_Env', dotEnv);
+// console.log('Node_Env', dotEnv);
 
 const { port } = require('../config');
 

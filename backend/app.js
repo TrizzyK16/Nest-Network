@@ -16,7 +16,17 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
-app.use(routes); // Connect all the routes
+
+// Set the _csrf token and create req.csrfToken method
+app.use(
+  csurf({
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction && "Lax",
+      httpOnly: true
+    }
+  })
+);
 
 // Security Middleware
 if (!isProduction) {
@@ -31,16 +41,8 @@ if (!isProduction) {
     })
   );
   
-  // Set the _csrf token and create req.csrfToken method
-  app.use(
-    csurf({
-      cookie: {
-        secure: isProduction,
-        sameSite: isProduction && "Lax",
-        httpOnly: true
-      }
-    })
-  );
+  
 
+  app.use(routes); // Connect all the routes
   // Export app
   module.exports = app;
