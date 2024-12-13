@@ -15,19 +15,24 @@ module.exports = {
       {
         email: 'demo1@user.io',
         username: 'Demo-lition1',
-        hashedPassword: bcrypt.hashSync('password1')
+        hashedPassword: bcrypt.hashSync('password1'),
+        firstName: 'Triston',
+        lastName: 'Stinky'
       },
       {
         email: 'demo2@user.io',
         username: 'Demo-lition2',
-        hashedPassword: bcrypt.hashSync('password2')
+        hashedPassword: bcrypt.hashSync('password2'),
+        firstName: 'Triston',
+        lastName: 'Stinky'
       },
       {
         email: 'demo3@user.io',
         username: 'Demo-lition3',
-        hashedPassword: bcrypt.hashSync('password3')
-      },
-
+        hashedPassword: bcrypt.hashSync('password3'),
+        firstName: 'Triston',
+        lastName: 'Stinky'
+      }
     ], { validate: true })
     /**
      * Add seed commands here.
