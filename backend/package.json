@@ -27,7 +27,6 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "nest_network": "file:..",
     "per-env": "^1.0.2",
     "pg": "^8.13.1",
     "sequelize": "^6.37.5",
