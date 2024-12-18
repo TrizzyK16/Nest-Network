@@ -2,7 +2,7 @@
 
 const { User } = require('../models');
 const bcrypt = require("bcryptjs");
-
+//LINES 6-9 (NICE) SHOULD BE INCLUDED BUT NOT NEEDED SPECIFICALLY FOR SEEDERS
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;

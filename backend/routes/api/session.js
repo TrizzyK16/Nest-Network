@@ -1,3 +1,5 @@
+//IF I EVER NEED THE LOGGED IN USERS INFO IT IS REQ.USER
+
 // backend/routes/api/session.js
 const express = require('express')
 const { Op } = require('sequelize');
@@ -10,9 +12,6 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
-
-// backend/routes/api/session.js
-// ...
 
 const validateLogin = [
   check('credential')
@@ -45,12 +44,14 @@ router.post(
       const err = new Error('Login failed');
       err.status = 401;
       err.title = 'Login failed';
-      err.errors = { credential: 'The provided credentials were invalid.' };
+      err.errors = { message: 'Invalid credentials' };
       return next(err);
     }
 
     const safeUser = {
       id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       username: user.username,
     };
@@ -91,6 +92,8 @@ router.get(
     } else return res.json({ user: null });
   }
 );
+
+
 
   
 

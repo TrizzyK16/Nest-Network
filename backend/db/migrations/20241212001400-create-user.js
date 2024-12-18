@@ -1,9 +1,14 @@
 'use strict';
 
+//EVERY SINGLE MIGRATION GETS THESE 4 LINES (6-9) (AYOOOOO) BELOW AT THE TOP
+
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
+
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -44,7 +49,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }, options);
+    }, options); //OPTIONS IS ALSO SUPER IMPORTANT AND DONT FORGET IT - WILL SEE TABLE XYZ DOENT EXIST (ON RENDER) IF NOT INCLUDED
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Users');
