@@ -1,6 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Spot = sequelize.define('Spot', {
+    id: {
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true
+    },
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -40,15 +46,6 @@ module.exports = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.FLOAT,
       allowNull: false
-    },
-    previewImage: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    avgRating: {
-      type: DataTypes.FLOAT,
-      allowNull: true,
-      defaultValue: 0
     }
   }, {});
   

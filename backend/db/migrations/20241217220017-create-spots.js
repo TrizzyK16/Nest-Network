@@ -58,15 +58,6 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false
       },
-      previewImage: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      avgRating: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
-        defaultValue: 0
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

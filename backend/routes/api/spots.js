@@ -37,7 +37,6 @@ router.get('/', async (req, res) => {
 router.post('/', requireAuth, (req, res) => {
 
     const {
-        ownerId,
         address,
         city,
         state,
@@ -46,19 +45,17 @@ router.post('/', requireAuth, (req, res) => {
         lng,
         name,
         description,
-        price,
-        avgRating,
-        previewImage
+        price
     } = req.body;
 
     // Validate required fields
-    if (!ownerId || !address || !city || !state || !country || !lat || !lng || !name || !description || !price || !avgRating || !previewImage) {
+    if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
     // Create new spot
     Spot.create({
-        ownerId,
+        ownerId: req.user.id,
         address,
         city,
         state,
@@ -67,16 +64,11 @@ router.post('/', requireAuth, (req, res) => {
         lng,
         name,
         description,
-        price,
-        avgRating,
-        previewImage
+        price
     })
         .then(newSpot => {
             // Successfully created the spot
-            return res.status(201).json({
-                message: 'Spot created successfully',
-                spot: newSpot
-            });
+            return res.status(201).json(newSpot);
         })
         .catch(error => {
             // Error occurred during spot creation
@@ -85,15 +77,8 @@ router.post('/', requireAuth, (req, res) => {
         });
 });
 
-//Add an image to a spot based on spots id
-router.post('/:spotid/images', requireAuth, (req, res) => {
-    if (Spot.ownerId === User.id) { //still need to assciate the tables
-
-    }
-});
-
 //EDIT A SPOT
-router.put("/api/spots/:spotId", requireAuth, async (req, res) => {
+router.put("/:spotId", requireAuth, async (req, res) => {
     const spotId = req.params.spotId;  // The spot ID from the URL params
     const { address, city, state, country, lat, lng, name, description, price } = req.body;  // Destructuring from the request body
 
@@ -114,7 +99,57 @@ router.put("/api/spots/:spotId", requireAuth, async (req, res) => {
             },
         })
     }
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        // If the spot does not exist, return a 404 error
+        return res.status(404).json({
+            message: "Spot not found",
+        });
+    }
+
+    if(spot.ownerId !== req.user.id){
+        res.status(401).json({error: "Must be owner to edit this spot"})
+    }
+
+
+    await spot.update({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price,
+    });
+
+    return res.json(spot)
 });
 
+
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const spotId = req.params.spotId;  // The spot ID from the URL params
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        // If the spot does not exist, return a 404 error
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+        });
+    }
+
+    if(spot.ownerId !== req.user.id){
+        res.status(401).json({error: "Must be owner to edit this spot"})
+    }
+
+    spot.destroy()
+
+    res.status(200).json({
+        message: "Successfully deleted"
+    })
+})
 
 module.exports = router;
