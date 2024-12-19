@@ -93,7 +93,7 @@ router.post('/:spotid/images', requireAuth, (req, res) => {
 });
 
 //EDIT A SPOT
-router.put("/api/spots/:spotId", checkAuthentication, async (req, res) => {
+router.put("/api/spots/:spotId", requireAuth, async (req, res) => {
     const spotId = req.params.spotId;  // The spot ID from the URL params
     const { address, city, state, country, lat, lng, name, description, price } = req.body;  // Destructuring from the request body
 
