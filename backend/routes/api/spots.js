@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router();
 const { Spot } = require('../../db/models')
 const { User } = require('../../db/models')
+const { SpotImage } = require('../../db/models')
+const { Review } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth');
 
 //get all spots
@@ -129,7 +131,7 @@ router.put("/:spotId", requireAuth, async (req, res) => {
     return res.json(spot)
 });
 
-
+//Delete a spot by id
 router.delete('/:spotId', requireAuth, async (req, res) => {
     const spotId = req.params.spotId;  // The spot ID from the URL params
     const spot = await Spot.findByPk(spotId);
@@ -150,6 +152,125 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     res.status(200).json({
         message: "Successfully deleted"
     })
+})
+
+//Add an image to a spot based on spot id
+router.post('/:spotId/images', requireAuth, async (req, res)=> {
+    const spotId = req.params.spotId;  // The spot ID from the URL params
+    const { url, preview } = req.body;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        // If the spot does not exist, return a 404 error
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+        });
+    }
+
+    if(spot.ownerId !== req.user.id){
+        res.status(401).json({error: "Must be owner to edit this spot"})
+    }
+
+   const spotImage = await SpotImage.create({
+        spotId: spot.id,
+        url: "image url",
+        preview: true
+    })
+
+    res.status(201).json({
+        "id": spotImage.id,
+        "url": spotImage.url,
+        "preview": spotImage.preview
+    })
+})
+
+//get all spots owned by the current user
+router.get('/session', requireAuth, async (req, res) => {
+    const userId = req.user.id
+    const userSpots = await Spot.findAll({
+        where: { ownerId: userId },
+        include: [{model: Review}, {model: SpotImage}],
+        attributes: [
+            "id",
+            "ownerId",
+            "address",
+            "city",
+            "state",
+            "country",
+            "lat",
+            "lng",
+            "name",
+            "description",
+            "price",
+            "createdAt",
+            "updatedAt",
+        ],
+    });
+
+    userSpots.forEach(element => {
+        element.dataValues.avgRating = element.dataValues.Reviews.reduce((acc, review) =>{
+            acc += review.stars
+       
+            return acc
+        }, 0)/element.dataValues.Reviews.length
+        delete element.dataValues.Reviews
+    })
+
+    // Find and add the preview image for each spot
+    userSpots.forEach(element => {
+        const previewImage = element.SpotImages.find(image => image.preview === true);
+        element.dataValues.previewImage = previewImage.url
+        delete element.dataValues.SpotImages;
+    });
+
+    // Respond with the spots
+    return res.json({
+        "Spots": userSpots
+    });
+})
+
+//Get details of a Spot from an id
+router.get('/:spotid', requireAuth, async (req, res) => {
+    const spotid = req.params.spotid
+
+    const spot = await Spot.findByPk(spotid, {
+        include: [
+            { model: Review }, 
+            { model: SpotImage, attributes: [
+                "id",
+                "url",
+                "preview" 
+            ]},
+            { model: User, attributes: [
+                "id",
+                "firstName",
+                "lastName"
+            ], as: "Owner"} 
+        ]
+    });
+    
+    if (!spot) {
+        // If the spot does not exist, return a 404 error
+        return res.status(404).json({
+            message: "Spot not found",
+        });
+    }
+
+    if(spot.ownerId !== req.user.id){
+        res.status(401).json({error: "Must be owner to edit this spot"})
+    }
+
+    spot.dataValues.numReviews = spot.dataValues.Reviews.length
+
+    const avgRating = spot.dataValues.Reviews.reduce((acc, review) => {
+        return acc + review.stars;
+    }, 0) / spot.dataValues.Reviews.length;
+
+    spot.dataValues.avgRating = avgRating;
+    delete spot.dataValues.Reviews
+
+    res.json(spot)
 })
 
 module.exports = router;

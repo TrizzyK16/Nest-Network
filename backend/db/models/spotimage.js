@@ -42,6 +42,15 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'SpotImage',
+    indexes: [
+      {
+        unique: true,
+        fields: ['spotId', 'preview'], // Ensure only one image per spot can have preview: true
+        where: {
+          preview: true // Only apply the unique constraint when preview is true
+        }
+      }
+    ]
   });
   return SpotImage;
 };

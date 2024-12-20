@@ -23,8 +23,6 @@ module.exports = {
         name: 'Cozy SF Apartment',
         description: 'A beautiful and cozy apartment in the heart of San Francisco.',
         price: 200,
-        previewImage: 'https://example.com/image1.jpg',
-        avgRating: 4.5,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -39,8 +37,6 @@ module.exports = {
         name: 'Beachfront Villa',
         description: 'A luxurious beachfront villa with stunning ocean views.',
         price: 500,
-        previewImage: 'https://example.com/image2.jpg',
-        avgRating: 4.8,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -55,8 +51,6 @@ module.exports = {
         name: 'Downtown Loft',
         description: 'A modern loft in the heart of New York City.',
         price: 300,
-        previewImage: 'https://example.com/image3.jpg',
-        avgRating: 4.7,
         createdAt: new Date(),
         updatedAt: new Date()
       }
