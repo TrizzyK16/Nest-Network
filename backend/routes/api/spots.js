@@ -1,10 +1,7 @@
 // backend/routes/api/spots.js
 const express = require('express')
 const router = express.Router();
-const { Spot } = require('../../db/models')
-const { User } = require('../../db/models')
-const { SpotImage } = require('../../db/models')
-const { Review } = require('../../db/models')
+const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth');
 
 //get all spots
@@ -272,5 +269,73 @@ router.get('/:spotid', requireAuth, async (req, res) => {
 
     res.json(spot)
 })
+
+router.post('/:spotid/reviews', requireAuth, async (req, res) => {
+    const spotId = req.params.spotid; // The spot ID from the URL params
+    const { review, stars } = req.body; // Extract review and stars from the request body
+
+    // Validate review and stars
+    if (!review || stars === undefined || stars < 1 || stars > 5) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: {
+                review: review ? undefined : "Review text is required",
+                stars: stars >= 1 && stars <= 5 ? undefined : "Stars must be an integer from 1 to 5",
+            }
+        });
+    }
+
+    // Check if the spot exists
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+        });
+    }
+
+    // Check if the user already has a review for this spot
+    const existingReview = await Review.findOne({
+        where: {
+            userId: req.user.id,
+            spotId: spotId,
+        },
+    });
+
+    if (existingReview) {
+        return res.status(500).json({
+            message: "User already has a review for this spot",
+        });
+    }
+
+    // Create the new review
+    const newReview = await Review.create({
+        userId: req.user.id,
+        spotId: spotId,
+        review: review,
+        stars: stars,
+    });
+
+    // Return the newly created review
+    res.status(201).json(newReview);
+});
+
+//dmitri dum dumb triston smarter but still bum dum
+//Get all Reviews by a Spot's id
+// router.get('/:spotid/reviews', requireAuth, async (req, res)=>{
+//     const spotid = req.params.id; // The spot ID from the URL params
+    
+    
+//     const reviews = await Review.findAll({
+//         where: {spot: spotid}
+//     })
+
+//     console.log(reviews)
+
+ 
+
+//     // res.json({"Reviews": spot.dataValues.Review})
+
+// })
 
 module.exports = router;

@@ -5,6 +5,7 @@ const { requireAuth } = require('../../utils/auth.js');
 const usersRouter = require('./users.js');
 const sessionRouter = require('./session.js');
 const spotsRouter = require('./spots.js');
+const reviewRouter = require('./reviews.js')
 
 router.post('/test', function (req, res) {
   res.json({ requestBody: req.body });
@@ -53,6 +54,10 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 
 router.use('/spots', spotsRouter);
+
+router.use('/reviews', reviewRouter);
+
+router.use('/reviews', reviewRouter)
 
 
 router.post('/test', (req, res) => {
