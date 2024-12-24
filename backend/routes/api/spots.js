@@ -108,7 +108,7 @@ router.put("/:spotId", requireAuth, async (req, res) => {
         });
     }
 
-    if(spot.ownerId !== req.user.id){
+    if (spot.ownerId !== req.user.id) {
         res.status(401).json({error: "Must be owner to edit this spot"})
     }
 
@@ -452,14 +452,14 @@ router.post('/:spotid/bookings', requireAuth, async (req, res) => {
     }
 
     // Create new spot
-    Booking.create({
+    const newBooking = Booking.create({
         userId: req.user.id,
         spotId: spotId,
         startDate: startDate,
         endDate: endDate
     })
 
-    return res.status(201).json({message: "yuppers"});
+    return res.status(201).json(newBooking);
     
 });
 

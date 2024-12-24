@@ -62,4 +62,50 @@ router.get('/session', requireAuth, async (req, res) => {
 })
 
 
+// Edit a booking
+router.put('/:bookingid', requireAuth, async (req, res) => {
+    const bookingId = req.params.bookingid; // The booking ID from the URL params
+    const {startDate, endDate} = req.body; // This allows us to use startDate and endDate as we need
+
+    if (!startDate || !endDate) {
+        // If startDate or endDate are invalid, return an error
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: {
+                startDate: "Proper date is required",
+                endDate: "Proper date is required"
+            }
+        });
+    }
+    
+    const booking = await Booking.findByPk(bookingId);
+
+    if (!booking) {
+        // If the booking doesn't exist return a 404 error
+        return res.status(404).json({
+            message: "Booking not found"
+        });
+    }
+
+    if (booking.userId !== req.user.id) {
+        res.status(401).json({error: "Must be user to edit this booking"});
+    }
+
+   if (error.name === 'SequalizeValidationError') {
+    return res.status(400).json({
+        errors: error.errors.map(err => ({
+            message: err.message,
+            field: err.path,
+        }))
+    })
+   }
+
+    await booking.update({
+        startDate,
+        endDate
+    });
+
+    return res.json(booking);
+});
+
 module.exports = router;
