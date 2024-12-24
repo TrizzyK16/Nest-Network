@@ -141,7 +141,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     }
 
     if(spot.ownerId !== req.user.id){
-        res.status(401).json({error: "Must be owner to edit this spot"})
+        res.status(401).json({error: "Must be owner to delete this spot"})
     }
 
     spot.destroy()
@@ -270,6 +270,8 @@ router.get('/:spotid', requireAuth, async (req, res) => {
     res.json(spot)
 })
 
+
+//create a review for a spot by id
 router.post('/:spotid/reviews', requireAuth, async (req, res) => {
     const spotId = req.params.spotid; // The spot ID from the URL params
     const { review, stars } = req.body; // Extract review and stars from the request body
@@ -303,7 +305,7 @@ router.post('/:spotid/reviews', requireAuth, async (req, res) => {
     });
 
     if (existingReview) {
-        return res.status(500).json({
+        return res.status(403).json({
             message: "User already has a review for this spot",
         });
     }
@@ -320,22 +322,147 @@ router.post('/:spotid/reviews', requireAuth, async (req, res) => {
     res.status(201).json(newReview);
 });
 
-//dmitri dum dumb triston smarter but still bum dum
 //Get all Reviews by a Spot's id
-// router.get('/:spotid/reviews', requireAuth, async (req, res)=>{
-//     const spotid = req.params.id; // The spot ID from the URL params
+router.get('/:spotid/reviews', requireAuth, async (req, res)=>{
+    const spotid = req.params.spotid; // The spot ID from the URL params
+
+    const spot = await Spot.findByPk(spotid);
     
+    if (!spot) {
+        // If the spot does not exist, return a 404 error
+        return res.status(404).json({
+            message: "Spot not found",
+        });
+    }
     
-//     const reviews = await Review.findAll({
-//         where: {spot: spotid}
-//     })
+    const reviews = await Review.findAll({
+        where: {spotId: spotid},
+        include: [
+            {model: User, attributes: ["id", "firstName", "lastName"]},
+             {model: ReviewImage, attributes: ["id", "url"]}
+            ]
+    })
 
-//     console.log(reviews)
+    res.json({"Reviews": reviews})
+    
+})
 
- 
+// Get all bookings for a spot based on the spot's id
+router.get('/:spotid/bookings', requireAuth, async (req, res) => {
+    const spotid = req.params.spotid; // The spot ID from the URL params
+    const userId = req.user.id; // The ID of the current authenticated user
 
-//     // res.json({"Reviews": spot.dataValues.Review})
+    // Find the spot by ID
+    const spot = await Spot.findByPk(spotid);
 
-// })
+    if (!spot) {
+        // If the spot does not exist, return a 404 error
+        return res.status(404).json({
+            message: "Spot not found",
+        });
+    }
+
+    const isOwner = spot.ownerId === userId;
+
+    const bookings = await Booking.findAll({
+        where: { spotId: spotid },
+        include: [
+            { model: User, attributes: ["id", "firstName", "lastName"] }
+        ]
+    });
+
+    const bookingsResponse = bookings.map(booking => {
+        let bookingData = {
+            id: booking.id,
+            spotId: booking.spotId,
+            userId: booking.ownerId,
+            startDate: booking.startDate,
+            endDate: booking.endDate,
+            createdAt: booking.createdAt,
+            updatedAt: booking.updatedAt,
+            user: booking.User
+        };
+
+      
+        if (!isOwner) {
+            bookingData = {
+                spotId: booking.spotId,
+                startDate: booking.startDate,
+                endDate: booking.endDate
+            }
+            return bookingData;
+        }
+
+        return bookingData;
+    });
+
+    // Respond with the bookings data
+    return res.json({
+        "Bookings": bookingsResponse
+    });
+});
+
+
+//Create a Booking from a Spot based on the Spot's id
+router.post('/:spotid/bookings', requireAuth, async (req, res) => {
+    const spotId = req.params.spotid;
+    const { startDate, endDate } = req.body;
+
+    // Find the spot
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        // If the spot does not exist, return a 404 error
+        return res.status(404).json({
+            message: "Spot not found",
+        });
+    }
+
+    // Validate required fields
+    if (!startDate || !endDate) {
+        return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    if (spot.ownerId === req.user.id) {
+        return res.status(400).json({
+            message: "User must not own spot",
+        });
+    }
+
+    // Convert start and end dates to Date objects
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    // Find existing bookings and check for date overlaps
+    const bookings = await Booking.findAll({
+        where: { spotId: spotId }
+    });
+
+    // Check if any booking overlaps with the new booking dates
+    for (const booking of bookings) {
+        const existingStart = new Date(booking.startDate);
+        const existingEnd = new Date(booking.endDate);
+
+        // Check if new booking's dates overlap with any existing booking's dates
+        if ((start >= existingStart && start < existingEnd) || (end > existingStart && end <= existingEnd) || (start <= existingStart && end >= existingEnd)) {
+            return res.status(403).json({
+                message: "Sorry, this spot is already booked for the specified dates",
+            });
+        }
+    }
+
+    // Create new spot
+    Booking.create({
+        userId: req.user.id,
+        spotId: spotId,
+        startDate: startDate,
+        endDate: endDate
+    })
+
+    return res.status(201).json({message: "yuppers"});
+    
+});
+
+
 
 module.exports = router;
