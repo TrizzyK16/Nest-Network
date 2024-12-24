@@ -1259,7 +1259,7 @@ Delete an existing booking.
   Spot must belong to the current user
 * Request
   * Method: DELETE
-  * Route path: /api/bookings/bookingid
+  * Route path: /api/bookings/:bookingid
   * Body: none
 
 * Successful Response
