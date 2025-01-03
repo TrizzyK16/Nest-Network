@@ -1,17 +1,18 @@
 'use strict';
 
-const { Spot } = require('../models');
-const bcrypt = require("bcryptjs");
-
-let options = {};
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;
-}
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Spot.bulkCreate([
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+    */
+    return queryInterface.bulkInsert('Spots', [
       {
         ownerId: 1,
         address: '123 Main St',
@@ -54,7 +55,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ])
+    ]);
   },
 
   async down (queryInterface, Sequelize) {
@@ -64,13 +65,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    // return queryInterface.bulkDelete('Spots', null, {});
-
-    options.tableName = 'Spot';
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
-      ownerId: { [Op.in]: [1, 2, 3] }
-    }, {});
-
+    return queryInterface.bulkDelete('Spots', null, {});
   }
 };
