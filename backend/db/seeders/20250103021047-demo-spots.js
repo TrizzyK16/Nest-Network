@@ -56,50 +56,6 @@ module.exports = {
         }
     ]);
 
-    // return queryInterface.bulkInsert('Spots', [
-    //   {
-    //     ownerId: 1,
-    //     address: '123 Main St',
-    //     city: 'San Francisco',
-    //     state: 'California',
-    //     country: 'USA',
-    //     lat: 37.7749,
-    //     lng: -122.4194,
-    //     name: 'Cozy SF Apartment',
-    //     description: 'A beautiful and cozy apartment in the heart of San Francisco.',
-    //     price: 200,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    //   },
-    //   {
-    //     ownerId: 2,
-    //     address: '456 Beach Rd',
-    //     city: 'Miami',
-    //     state: 'Florida',
-    //     country: 'USA',
-    //     lat: 25.7617,
-    //     lng: -80.1918,
-    //     name: 'Beachfront Villa',
-    //     description: 'A luxurious beachfront villa with stunning ocean views.',
-    //     price: 500,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    //   },
-    //   {
-    //     ownerId: 3,
-    //     address: '789 Downtown Ave',
-    //     city: 'New York',
-    //     state: 'New York',
-    //     country: 'USA',
-    //     lat: 40.7128,
-    //     lng: -74.0060,
-    //     name: 'Downtown Loft',
-    //     description: 'A modern loft in the heart of New York City.',
-    //     price: 300,
-    //     createdAt: new Date(),
-    //     updatedAt: new Date()
-    //   }
-    // ]);
   },
 
   async down (queryInterface, Sequelize) {
@@ -109,6 +65,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    options.tableName = 'Spots';
     return queryInterface.bulkDelete('Spots', null, {});
   }
 };
