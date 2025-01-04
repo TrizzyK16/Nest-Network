@@ -71,7 +71,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
-    schema: 'nest_network',
   });
   return Spot;
 };
