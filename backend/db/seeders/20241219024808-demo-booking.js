@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
@@ -13,26 +14,20 @@ module.exports = {
       {
           spotId: 1,
           userId: 1,
-          startDate: new Date('2024-12-20T09:00:00'),
-          endDate: new Date('2024-12-20T12:00:00'),
-          createdAt: new Date(),
-          updatedAt: new Date()
+          startDate: new Date('2025-12-20'),
+          endDate: new Date('2025-12-21')
         },
         {
           spotId: 2,
           userId: 2,
-          startDate: new Date('2024-12-21T10:00:00'),
-          endDate: new Date('2024-12-21T14:00:00'),
-          createdAt: new Date(),
-          updatedAt: new Date()
+          startDate: new Date('2025-12-21'),
+          endDate: new Date('2025-12-22')
         },
         {
           spotId: 3,
           userId: 3,
-          startDate: new Date('2024-12-22T08:00:00'),
-          endDate: new Date('2024-12-22T11:00:00'),
-          createdAt: new Date(),
-          updatedAt: new Date()
+          startDate: new Date('2025-12-22'),
+          endDate: new Date('2025-12-23')
         }
     ], { validate: true });
   
@@ -44,9 +39,9 @@ module.exports = {
     await queryInterface.bulkDelete(options, {
       startDate: {
         [Op.in]: [
-          new Date('2024-12-20T09:00:00'),
-          new Date('2024-12-21T10:00:00'),
-          new Date('2024-12-22T08:00:00')
+          new Date('2024-12-20'),
+          new Date('2024-12-21'),
+          new Date('2024-12-22')
         ]
       }
     });

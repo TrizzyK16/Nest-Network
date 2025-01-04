@@ -2,6 +2,7 @@
 
 const { ReviewImage } = require('../models');
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 

@@ -18,28 +18,30 @@ module.exports = {
       },
       spotId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        // allowNull: false,
         autoIncrement: true
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        // allowNull: false,
       },
       startDate: {
         type: Sequelize.DATE,
-        allowNull: false,
+        // allowNull: false,
       },
       endDate: {
         type: Sequelize.DATE,
-        allowNull: false,
+        // allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        // allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        // allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     }, options);
   },

@@ -2,6 +2,7 @@
 
 const { Review } = require("../models");
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return Review.bulkCreate([
