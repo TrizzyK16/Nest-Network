@@ -5,7 +5,7 @@ const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../d
 const { requireAuth } = require('../../utils/auth');
 
 //get all bookings by the current user
-router.get('/session', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
     const userId = req.user.id
     const userBookings = await Booking.findAll({
         where: { userId: userId },

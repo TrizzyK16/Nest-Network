@@ -5,7 +5,7 @@ const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../d
 const { requireAuth } = require('../../utils/auth');
 
 //Get all Reviews of the Current User
-router.get('/session', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
     const userId = req.user.id;
 
     const reviews = await Review.findAll({
