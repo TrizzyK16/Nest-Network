@@ -8,6 +8,10 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const validateSignup = [
+  check("firstName")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 2 })
+    .withMessage("Please provide a first name."),
   check("email")
     .exists({ checkFalsy: true })
     .isEmail()
@@ -27,6 +31,7 @@ const validateSignup = [
 // Sign up
 router.post("/", validateSignup, async (req, res) => {
   const { firstName, lastName, email, password, username } = req.body;
+
   const hashedPassword = bcrypt.hashSync(password);
   const user = await User.create({
     firstName,
@@ -36,6 +41,7 @@ router.post("/", validateSignup, async (req, res) => {
     hashedPassword,
   });
 
+  
   const safeUser = {
     id: user.id,
     firstName: user.firstName,
@@ -46,7 +52,7 @@ router.post("/", validateSignup, async (req, res) => {
 
   await setTokenCookie(res, safeUser);
 
-  return res.json({
+  return res.status(201).json({
     user: safeUser,
   });
 });
