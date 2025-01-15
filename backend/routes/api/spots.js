@@ -313,7 +313,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
 //Get details of a Spot from an id
 router.get('/:spotid', requireAuth, async (req, res) => {
-    const spotid = req.params.spotid
+    const spotid = req.params.spotid;
 
     const spot = await Spot.findByPk(spotid, {
         include: [
@@ -321,7 +321,7 @@ router.get('/:spotid', requireAuth, async (req, res) => {
             { model: SpotImage, attributes: [
                 "id",
                 "url",
-                "preview" 
+                "preview"
             ]},
             { model: User, attributes: [
                 "id",
@@ -330,29 +330,38 @@ router.get('/:spotid', requireAuth, async (req, res) => {
             ], as: "Owner"} 
         ]
     });
-    
+
     if (!spot) {
         // If the spot does not exist, return a 404 error
         return res.status(404).json({
-            message: "Spot not found",
+            error: "Spot not found",
         });
     }
 
-    if(spot.ownerId !== req.user.id){
-        res.status(401).json({error: "Must be owner to edit this spot"})
+    // Check if the user is the owner of the spot
+    if (spot.ownerId !== req.user.id) {
+        return res.status(401).json({ error: "Must be owner to edit this spot" });
     }
 
-    spot.dataValues.numReviews = spot.dataValues.Reviews.length
+    spot.dataValues.numReviews = spot.Reviews.length;
 
-    const avgRating = spot.dataValues.Reviews.reduce((acc, review) => {
-        return acc + review.stars;
-    }, 0) / spot.dataValues.Reviews.length;
+    // Check if there are reviews before calculating the average rating
+    if (spot.Reviews.length > 0) {
+        const avgRating = spot.Reviews.reduce((acc, review) => {
+            return acc + review.stars;
+        }, 0) / spot.Reviews.length;
 
-    spot.dataValues.avgRating = avgRating;
-    delete spot.dataValues.Reviews
+        spot.dataValues.avgRating = avgRating;
+    } else {
+        // If there are no reviews, set avgRating to null or 0
+        spot.dataValues.avgRating = 0;
+    }
 
-    res.json(spot)
-})
+    // Remove the Reviews array from the final response
+    delete spot.dataValues.Reviews;
+
+    return res.json(spot);
+});
 
 
 //create a review for a spot by id
