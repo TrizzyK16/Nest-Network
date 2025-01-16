@@ -300,13 +300,11 @@ router.get('/current', requireAuth, async (req, res) => {
 
     // Find and add the preview image for each spot
     userSpots.forEach(element => {
-        console.log(element)
-        const previewImage = element.SpotImages.find(image => 
+        const previewImage = element.dataValues.SpotImages.find(image => 
             image.preview === true,
         );
 
-        console.log(previewImage)
-        element.dataValues.previewImage = previewImage.url
+        element.dataValues.previewImage = previewImage.url || "no preview image";
 
         delete element.dataValues.SpotImages;
     });
