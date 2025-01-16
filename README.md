@@ -810,7 +810,7 @@ Create and return a new image for a review specified by id.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: POST
-  * Route path: /api/reviews/:reviewid/reviewimage
+  * Route path: /api/reviews/:reviewid/images
   * Headers:
     * Content-Type: application/json
   * Body:
