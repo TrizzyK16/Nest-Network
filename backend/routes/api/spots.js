@@ -327,7 +327,7 @@ router.get('/:spotid', requireAuth, async (req, res) => {
                 "id",
                 "firstName",
                 "lastName"
-            ], as: "Owner"} 
+            ]} 
         ]
     });
 
