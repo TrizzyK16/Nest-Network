@@ -301,11 +301,14 @@ router.get('/current', requireAuth, async (req, res) => {
     // Find and add the preview image for each spot
     userSpots.forEach(element => {
         const previewImage = element.dataValues.SpotImages.find(image => 
-            image.preview === true,
-        );
+            image.preview === true
+        )
 
-        element.dataValues.previewImage = previewImage.url || "no preview image";
-
+        if(previewImage){
+            element.dataValues.previewImage = previewImage.url
+        } else {
+            element.dataValues.previewImage = "No preview available"
+        }
         delete element.dataValues.SpotImages;
     });
 
