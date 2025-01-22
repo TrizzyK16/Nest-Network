@@ -7,94 +7,85 @@ const { requireAuth } = require('../../utils/auth');
 // //get all spots with optional filters
 
 router.get('/', async (req, res) => {
-    try {
-        // Extract query parameters and set defaults
-        let { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    // Extract query parameters and set defaults
+    let { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-        // Log received query parameters
-        console.log("Received Query Parameters:", req.query);
+    // Log received query parameters
+    console.log("Received Query Parameters:", req.query);
 
-        // Validate 'page' parameter (ensuring it's >= 1)
-        if (page < 1) {
-            return res.status(400).json({
-                message: "Bad Request",
-                errors: { page: "Page must be greater than or equal to 1" }
-            });
-        }
-
-        if (typeof size === 'string' || isNaN(size)) {
-            return res.status(400).json({
-                message: "Bad Request",
-                errors: { size: "Size must be a number" }
-            });
-        }
-
-        // Validate 'size' parameter (ensuring it's within a reasonable range)
-        if (size < 1 || size > 20) {
-            return res.status(400).json({
-                message: "Bad Request",
-                errors: { size: "Size must be between 1 and 20" }
-            });
-        }
-
-        // // Prepare pagination
-        const limit = parseInt(size);
-        const offset = (page - 1) * limit;
-
-        // // Log pagination settings
-         console.log("Pagination Settings - Limit:", limit, "Offset:", offset);
-
-        // Query all spots without filtering
-        const spots = await Spot.findAll({
-            limit: limit,
-            offset: offset,
-            logging: console.log  // Log the raw SQL query to the console
-        });
-
-        // Filter spots manually based on query parameters
-        const filteredSpots = spots.filter(spot => {
-            let isValid = true;
-
-            // Check latitude filter
-            if (minLat && spot.lat < minLat) isValid = false;
-            if (maxLat && spot.lat > maxLat) isValid = false;
-
-            // Check longitude filter
-            if (minLng && spot.lng < minLng) isValid = false;
-            if (maxLng && spot.lng > maxLng) isValid = false;
-
-            // Check price filter
-            if (minPrice && spot.price < minPrice) isValid = false;
-            if (maxPrice && spot.price > maxPrice) isValid = false;
-
-            return isValid;
-        });
-
-        // Log spots to ensure we are retrieving them
-        console.log("Filtered Spots:", filteredSpots);
-
-        // // Get the total number of spots for pagination info
-        const totalSpots = await Spot.count({
-            logging: console.log  // Log the raw SQL query for count
-        });
-
-        // // Log the successful execution
-        console.log("you've made it here");
-
-        // Return the paginated and filtered spots
-        return res.json({
-            Spots: filteredSpots,
-            page: parseInt(page),
-            size: parseInt(size)
-        });
-
-    } catch (error) {
-        // Log the error to help with debugging
-        console.error("Error occurred:", error);
-        return res.status(500).json({
-            message: "Internal Server Error"
+    // Validate 'page' parameter (ensuring it's >= 1)
+    if (page < 1) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: { page: "Page must be greater than or equal to 1" }
         });
     }
+
+    if (typeof size === 'string' || isNaN(size)) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: { size: "Size must be a number" }
+        });
+    }
+
+    // Validate 'size' parameter (ensuring it's within a reasonable range)
+    if (size < 1 || size > 20) {
+        return res.status(400).json({
+            message: "Bad Request",
+            errors: { size: "Size must be between 1 and 20" }
+        });
+    }
+
+    // // Prepare pagination
+    const limit = parseInt(size);
+    const offset = (page - 1) * limit;
+
+    // // Log pagination settings
+     console.log("Pagination Settings - Limit:", limit, "Offset:", offset);
+
+    // Query all spots without filtering
+    const spots = await Spot.findAll({
+        limit: limit,
+        offset: offset,
+        logging: console.log  // Log the raw SQL query to the console
+    });
+
+    // Filter spots manually based on query parameters
+    const filteredSpots = spots.filter(spot => {
+        let isValid = true;
+
+        // Check latitude filter
+        if (minLat && spot.lat < minLat) isValid = false;
+        if (maxLat && spot.lat > maxLat) isValid = false;
+
+        // Check longitude filter
+        if (minLng && spot.lng < minLng) isValid = false;
+        if (maxLng && spot.lng > maxLng) isValid = false;
+
+        // Check price filter
+        if (minPrice && spot.price < minPrice) isValid = false;
+        if (maxPrice && spot.price > maxPrice) isValid = false;
+
+        return isValid;
+    });
+
+    // Log spots to ensure we are retrieving them
+    console.log("Filtered Spots:", filteredSpots);
+
+    // // Get the total number of spots for pagination info
+    const totalSpots = await Spot.count({
+        logging: console.log  // Log the raw SQL query for count
+    });
+
+    // // Log the successful execution
+    console.log("you've made it here");
+
+    // Return the paginated and filtered spots
+    return res.json({
+        Spots: filteredSpots,
+        page: parseInt(page),
+        size: parseInt(size)
+    });
 });
 
 
