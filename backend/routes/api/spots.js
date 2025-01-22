@@ -21,16 +21,15 @@ router.get('/', async (req, res) => {
         });
     }
 
-    if (typeof size === 'string' || isNaN(Number(size))) {
+    // Convert 'size' to a number and validate if it's a valid number
+    size = Number(size);  // Convert to number
+    if (isNaN(size) || typeof size !== 'number') {
         return res.status(400).json({
             message: "Bad Request",
             errors: { size: "Size must be a valid number" }
         });
     }
-    
-    // Convert 'size' to a number
-    size = Number(size);  // Or you can use parseInt(size) or +size
-    
+
     // Validate 'size' parameter (ensuring it's within a reasonable range)
     if (size < 1 || size > 20) {
         return res.status(400).json({
@@ -39,12 +38,12 @@ router.get('/', async (req, res) => {
         });
     }
 
-    // // Prepare pagination
-    const limit = parseInt(size);
+    // Prepare pagination
+    const limit = size;  // Now 'size' is a number
     const offset = (page - 1) * limit;
 
-    // // Log pagination settings
-     console.log("Pagination Settings - Limit:", limit, "Offset:", offset);
+    // Log pagination settings
+    console.log("Pagination Settings - Limit:", limit, "Offset:", offset);
 
     // Query all spots without filtering
     const spots = await Spot.findAll({
@@ -75,21 +74,22 @@ router.get('/', async (req, res) => {
     // Log spots to ensure we are retrieving them
     console.log("Filtered Spots:", filteredSpots);
 
-    // // Get the total number of spots for pagination info
+    // Get the total number of spots for pagination info
     const totalSpots = await Spot.count({
         logging: console.log  // Log the raw SQL query for count
     });
 
-    // // Log the successful execution
+    // Log the successful execution
     console.log("you've made it here");
 
     // Return the paginated and filtered spots
     return res.json({
         Spots: filteredSpots,
         page: parseInt(page),
-        size: parseInt(size)
+        size: size
     });
 });
+
 
 
 //Create a spot
