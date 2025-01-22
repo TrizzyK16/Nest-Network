@@ -21,13 +21,16 @@ router.get('/', async (req, res) => {
         });
     }
 
-    if (typeof size === 'string' || isNaN(size)) {
+    if (typeof size === 'string' || isNaN(Number(size)) || size.trim() === '') {
         return res.status(400).json({
             message: "Bad Request",
-            errors: { size: "Size must be a number" }
+            errors: { size: "Size must be a valid number" }
         });
     }
-
+    
+    // Convert 'size' to a number
+    size = Number(size);  // Or you can use parseInt(size) or +size
+    
     // Validate 'size' parameter (ensuring it's within a reasonable range)
     if (size < 1 || size > 20) {
         return res.status(400).json({
