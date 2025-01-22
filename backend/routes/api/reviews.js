@@ -131,7 +131,7 @@ router.put("/:reviewid", requireAuth, async (req, res) => {
 // //Delete a review by id
 router.delete('/:reviewid', requireAuth, async (req, res) => {
     const reviewId = req.params.reviewid;  // The spot ID from the URL params
-    const review = await Spot.findByPk(reviewId);
+    const review = await Review.findByPk(reviewId);
 
     if (!review) {
         // If the spot does not exist, return a 404 error

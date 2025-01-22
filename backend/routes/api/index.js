@@ -60,9 +60,9 @@ router.use('/spots', spotsRouter);
 
 router.use('/reviews', reviewRouter);
 
-router.use('/spotimages', spotImageRouter);
+router.use('/spot-images', spotImageRouter);
 
-router.use('/reviewimages', reviewImageRouter)
+router.use('/review-images', reviewImageRouter)
 
 router.use('/bookings', bookingRouter)
 

@@ -5,7 +5,7 @@ const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../d
 const { requireAuth } = require('../../utils/auth');
 
 // //Delete a review image by id
-router.delete('/:reviewimageid', requireAuth, async (req, res) => {
+router.delete('/:reviewImageId', requireAuth, async (req, res) => {
     const reviewimageId = req.params.reviewimageid;  // The reviewimage ID from the URL params
     const reviewimage = await ReviewImage.findByPk(reviewimageId);
     
