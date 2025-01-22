@@ -22,10 +22,15 @@ router.get('/', async (req, res) => {
             });
         }
 
-        const limit = parseInt(size);
+        if (typeof size === 'string' || isNaN(size)) {
+            return res.status(400).json({
+                message: "Bad Request",
+                errors: { size: "Size must be a number" }
+            });
+        }
 
         // Validate 'size' parameter (ensuring it's within a reasonable range)
-        if (limit < 1 || limit > 20) {
+        if (size < 1 || size > 20) {
             return res.status(400).json({
                 message: "Bad Request",
                 errors: { size: "Size must be between 1 and 20" }
@@ -33,6 +38,7 @@ router.get('/', async (req, res) => {
         }
 
         // // Prepare pagination
+        const limit = parseInt(size);
         const offset = (page - 1) * limit;
 
         // // Log pagination settings
