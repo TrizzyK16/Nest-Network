@@ -4,32 +4,7 @@ const router = express.Router();
 const { Spot, User, SpotImage, Review, ReviewImage, Booking } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth');
 
-// //get all spots
-// router.get('/', async (req, res) => {
-//     const spots = await Spot.findAll();
-
-//     // Map the spots to remove unnecessary fields and structure the response
-//     const formattedSpots = spots.map(spot => ({
-//         id: spot.id,
-//         ownerId: spot.ownerId,
-//         address: spot.address,
-//         city: spot.city,
-//         state: spot.state,
-//         country: spot.country,
-//         lat: spot.lat,
-//         lng: spot.lng,
-//         name: spot.name,
-//         description: spot.description,
-//         price: spot.price,
-//         createdAt: spot.createdAt,
-//         updatedAt: spot.updatedAt,
-//         avgRating: spot.avgRating,
-//         previewImage: spot.previewImage
-//     }))
-//     return res.json({
-//         Spots: formattedSpots
-//     });
-// })
+// //get all spots with optional filters
 
 router.get('/', async (req, res) => {
     try {
@@ -47,8 +22,10 @@ router.get('/', async (req, res) => {
             });
         }
 
+        const limit = parseInt(size);
+
         // Validate 'size' parameter (ensuring it's within a reasonable range)
-        if (size < 1 || size > 20) {
+        if (limit < 1 || limit > 20) {
             return res.status(400).json({
                 message: "Bad Request",
                 errors: { size: "Size must be between 1 and 20" }
@@ -56,7 +33,6 @@ router.get('/', async (req, res) => {
         }
 
         // // Prepare pagination
-        const limit = parseInt(size);
         const offset = (page - 1) * limit;
 
         // // Log pagination settings
