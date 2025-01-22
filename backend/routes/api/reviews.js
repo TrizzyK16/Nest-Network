@@ -140,7 +140,7 @@ router.delete('/:reviewid', requireAuth, async (req, res) => {
         });
     }
 
-    if(review.ownerId !== req.user.id){
+    if(review.userId !== req.user.id){
         res.status(401).json({error: "Must be owner to delete this review"})
     }
 
