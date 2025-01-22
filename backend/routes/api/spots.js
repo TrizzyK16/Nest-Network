@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
         });
     }
 
-    if (typeof size === 'string' || isNaN(Number(size)) || size.trim() === '') {
+    if (typeof size === 'string' || isNaN(Number(size))) {
         return res.status(400).json({
             message: "Bad Request",
             errors: { size: "Size must be a valid number" }
