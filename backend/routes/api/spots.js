@@ -295,7 +295,7 @@ router.get('/current', requireAuth, async (req, res) => {
 })
 
 //Get details of a Spot from an id
-router.get('/:spotid', requireAuth, async (req, res) => {
+router.get('/:spotid', async (req, res) => {
     const spotid = req.params.spotid;
 
     const spot = await Spot.findByPk(spotid, {
@@ -321,10 +321,10 @@ router.get('/:spotid', requireAuth, async (req, res) => {
         });
     }
 
-    // Check if the user is the owner of the spot
-    if (spot.ownerId !== req.user.id) {
-        return res.status(401).json({ error: "Must be owner to edit this spot" });
-    }
+    // // Check if the user is the owner of the spot
+    // if (spot.ownerId !== req.user.id) {
+    //     return res.status(401).json({ error: "Must be owner to edit this spot" });
+    // }
 
     spot.dataValues.numReviews = spot.Reviews.length;
 
