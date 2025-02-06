@@ -9,16 +9,30 @@
   justify-content: center;
   background-color: #f8f8f8;
   padding: 20px;
-  border: 2px solid #ccc; /* Added border */
-  border-radius: 10px; /* Optional: Rounded corners for the container */
+  border: 2px solid #ccc;
+  /* Added border */
+  border-radius: 10px;
+  /* Optional: Rounded corners for the container */
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 20px;
-  border-bottom: 2px solid #ccc; /* Border below the title */
+  border-bottom: 2px solid #ccc;
+  /* Border below the title */
   padding-bottom: 10px;
+}
+
+.hamburger-icon {
+  margin-bottom: 1.75px;
+}
+
+.user-icon,
+.hamburger-icon {
+  display: inline-flex;
+  justify-content: center;
+  padding: 0 5px;
 }
 
 .search-box {
@@ -29,14 +43,16 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
-  border: 2px solid #ddd; /* Added border */
+  border: 2px solid #ddd;
+  /* Added border */
 }
 
 .search-bar {
   display: flex;
   gap: 10px;
   align-items: center;
-  border: 2px solid #ddd; /* Added border */
+  border: 2px solid #ddd;
+  /* Added border */
   padding: 10px;
   border-radius: 5px;
 }
@@ -52,7 +68,8 @@
 .search-button {
   background-color: #ff5a5f;
   color: white;
-  border: 2px solid #ff5a5f; /* Added border */
+  border: 2px solid #ff5a5f;
+  /* Added border */
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
@@ -69,11 +86,13 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   width: 100%;
-  border: 2px solid #ccc; /* Added border around the grid */
+  border: 2px solid #ccc;
+  /* Added border around the grid */
 }
 
 .listing-card {
-  border: 2px solid #ccc; /* Added border */
+  border: 2px solid #ccc;
+  /* Added border */
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
@@ -88,15 +107,18 @@
 .listing-image {
   width: 100%;
   height: auto;
-  border: 2px solid #ddd; /* Added border around the image */
+  border: 2px solid #ddd;
+  /* Added border around the image */
   border-radius: 8px;
 }
 
 .listing-details {
   padding: 15px;
   text-align: center;
-  border-top: 2px solid #ddd; /* Border on top of the listing details */
-  border-bottom: 2px solid #ddd; /* Border at the bottom of the listing details */
+  border-top: 2px solid #ddd;
+  /* Border on top of the listing details */
+  border-bottom: 2px solid #ddd;
+  /* Border at the bottom of the listing details */
 }
 
 .listing-title {
@@ -114,7 +136,8 @@
 .details-button {
   background-color: #ff5a5f;
   color: white;
-  border: 2px solid #ff5a5f; /* Added border */
+  border: 2px solid #ff5a5f;
+  /* Added border */
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
@@ -130,9 +153,12 @@
   font-size: 1.1rem;
   color: #333;
   margin-bottom: 8px;
-  border-bottom: 2px solid #ccc; /* Border below the city/state */
-  padding-bottom: 8px; /* Padding to separate the text from the border */
-  border: 2px solid #ddd; /* Added border */
+  border-bottom: 2px solid #ccc;
+  /* Border below the city/state */
+  padding-bottom: 8px;
+  /* Padding to separate the text from the border */
+  border: 2px solid #ddd;
+  /* Added border */
   padding: 10px;
 }
 
@@ -140,8 +166,10 @@
   font-size: 1.5rem;
   color: #ff5a5f;
   margin-bottom: 10px;
-  border: 2px solid #ddd; /* Added border to the star section */
-  border-radius: 5px; /* Rounded corners for star container */
+  border: 2px solid #ddd;
+  /* Added border to the star section */
+  border-radius: 5px;
+  /* Rounded corners for star container */
   padding: 5px;
 }
 
@@ -149,9 +177,11 @@
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
-  border: 2px solid #ddd; /* Added border around the rating */
+  border: 2px solid #ddd;
+  /* Added border around the rating */
   padding: 5px;
-  border-radius: 5px; /* Rounded corners for rating */
+  border-radius: 5px;
+  /* Rounded corners for rating */
   text-align: center;
 }
 
@@ -160,11 +190,12 @@
   margin-top: 20px;
   width: 100%;
   max-width: 1200px;
-  border: 2px solid #ddd; /* Added border around the listing grid */
+  border: 2px solid #ddd;
+  /* Added border around the listing grid */
 }
 
 .image {
-  border: 2px solid #ddd; /* Added border to the image div */
+  border: 2px solid #ddd;
+  /* Added border to the image div */
   padding: 10px;
 }
-
