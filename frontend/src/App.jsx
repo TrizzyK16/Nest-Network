@@ -1,11 +1,10 @@
-// frontend/src/App.jsx
-
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import * as sessionActions from './store/session';
 import LandingPage from './components/LandingPage/LandingPage';
+import SpotDetails from './components/SpotDetailsPage/SpotDetails'; 
 
 function Layout() {
   const dispatch = useDispatch();
@@ -13,7 +12,7 @@ function Layout() {
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => {
-      setIsLoaded(true)
+      setIsLoaded(true);
     });
   }, [dispatch]);
 
@@ -31,10 +30,14 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <LandingPage />
-      }
-    ]
-  }
+        element: <LandingPage />,
+      },
+      {
+        path: '/spots/:spotId',
+        element: <SpotDetails />,
+      },
+    ],
+  },
 ]);
 
 function App() {
