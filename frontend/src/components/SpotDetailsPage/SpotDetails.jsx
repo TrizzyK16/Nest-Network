@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchSpotsById } from "../../store/spots"; 
+import ReviewsBySpot from '../ReviewsBySpot/ReviewsBySpot'
 import './SpotDetails.css'
 
 export default function SpotDetails() {
@@ -48,11 +49,11 @@ export default function SpotDetails() {
         <div className="spotDescription">
           <p>{spot.description}</p>
         </div>
-        <div booking-container>
+        <div className="booking-container">
           <div className="pricing">
             <h3>${spot.price}/ night</h3>
           </div>
-          <div review-info>
+          <div className="review-info">
             <span>⭐ {spot.avgRating}</span>
             <h4>{spot.numReviews} reviews</h4>
           </div>
@@ -61,7 +62,12 @@ export default function SpotDetails() {
           </div>
         </div>
       </div>
-      
+      <div className="reviews-container">
+        <div className="large-review-info">
+          <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+        </div>
+        <ReviewsBySpot />
+      </div>
     </div>
   );
 }

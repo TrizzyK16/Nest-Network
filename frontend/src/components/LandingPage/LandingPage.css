@@ -35,69 +35,25 @@
   padding: 0 5px;
 }
 
-.search-box {
-  width: 100%;
-  max-width: 600px;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  border: 2px solid #ddd;
-  /* Added border */
-}
 
-.search-bar {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  border: 2px solid #ddd;
-  /* Added border */
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.search-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-.search-button {
-  background-color: #ff5a5f;
-  color: white;
-  border: 2px solid #ff5a5f;
-  /* Added border */
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.search-button:hover {
-  background-color: #e0484e;
-}
-
-/* Card Layout */
 .listing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Dynamically adjust columns */
   gap: 20px;
   width: 100%;
-  border: 2px solid #ccc;
-  /* Added border around the grid */
+  margin-top: 20px;
+  max-width: 1200px;
+  border: 2px solid black;
 }
 
+
 .listing-card {
-  border: 2px solid #ccc;
+  border: 2px solid black;
   /* Added border */
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
   transition: transform 0.2s ease-in-out;
-  margin: 10px;
 }
 
 .listing-card:hover {
@@ -173,7 +129,7 @@
   padding: 5px;
 }
 
-.rating {
+.price {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
@@ -185,17 +141,20 @@
   text-align: center;
 }
 
-/* Ensure smooth grid layout */
-.listing-grid {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 1200px;
-  border: 2px solid #ddd;
-  /* Added border around the listing grid */
-}
+
 
 .image {
-  border: 2px solid #ddd;
-  /* Added border to the image div */
-  padding: 10px;
+  overflow: hidden; /* Ensures the image doesn’t overflow */
+  border: 2px solid black;
+  padding: 0; /* Remove padding to prevent unnecessary expansion */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures image fills the space without distortion */
+  border-radius: 5px; /* Optional: Keeps it looking nice */
 }

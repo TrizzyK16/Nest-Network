@@ -1,0 +1,46 @@
+.reviews-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #ccc; /* Border around entire reviews section */
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-item {
+    padding: 15px;
+    border: 2px solid #aaa; /* Border around each individual review */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+  }
+  
+  .review-user {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid #888; /* Border around user name */
+    border-radius: 10px;
+    margin-bottom: 5px;
+    background: #eee;
+  }
+  
+  .review-date {
+    font-size: 0.9rem;
+    color: #666;
+    padding: 5px;
+    border: 2px solid #bbb; /* Border around date */
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: #f0f0f0;
+  }
+  
+  .review-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 10px;
+    border: 2px solid #aaa; /* Border around review text */
+    border-radius: 10px;
+    background: #fff;
+  }
+  

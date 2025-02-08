@@ -53,9 +53,36 @@ module.exports = {
           price: 300,
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          ownerId: 4,
+          address: '456 Oceanview Drive',
+          city: 'Miami',
+          state: 'Florida',
+          country: 'USA',
+          lat: 25.7617,
+          lng: -80.1918,
+          name: 'Beachfront Paradise',
+          description: 'A stunning beachfront property with breathtaking ocean views.',
+          price: 450,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          ownerId: 5,
+          address: '321 Mountain Retreat Rd',
+          city: 'Aspen',
+          state: 'Colorado',
+          country: 'USA',
+          lat: 39.1911,
+          lng: -106.8175,
+          name: 'Cozy Mountain Cabin',
+          description: 'A warm and inviting cabin nestled in the Aspen mountains.',
+          price: 350,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
     ]);
-
   },
 
   async down (queryInterface, Sequelize) {

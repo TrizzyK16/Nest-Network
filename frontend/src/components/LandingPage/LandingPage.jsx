@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchSpots } from "../../store/spots";
+import { Link } from 'react-router-dom';
 import "./LandingPage.css";
 
 export default function LandingPage() {
@@ -19,7 +20,7 @@ export default function LandingPage() {
 
        <div className="listing-grid">
         {spots?.map((spot) => (
-          <div key={spot.id}>
+          <Link key={spot.id} to={`/spots/${spot.id}`} className="listing-card">
             <div className="image">
                 <img src={spot.previewImage} alt={spot.name}/>
             </div>
@@ -27,16 +28,15 @@ export default function LandingPage() {
                 <h3>{spot.city}, {spot.state}</h3>
             </div>
             <div className="star">
-                <span>⭐</span>
+                <span>⭐ {spot.avgRating}</span>
             </div>
-            <div className="rating number">
-                <h3>{spot.avgRating}</h3>
+            <div className="price">
+                <h3>{spot.price}/ night</h3>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
      
     </div>
   );
 }
-

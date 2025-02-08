@@ -12,35 +12,49 @@ module.exports = {
      return SpotImage.bulkCreate([
       {
             spotId: 1,
-            url: 'https://example.com/image1.jpg',
+            url: 'https://picsum.photos/800/600',
             preview: true,
             createdAt: new Date(),
             updatedAt: new Date()
           },
           {
             spotId: 1,
-            url: 'https://example.com/image2.jpg',
+            url: 'https://picsum.photos/800/600',
             preview: false,
             createdAt: new Date(),
             updatedAt: new Date()
           },
           {
             spotId: 2,
-            url: 'https://example.com/image3.jpg',
+            url: 'https://picsum.photos/800/600',
             preview: true,
             createdAt: new Date(),
             updatedAt: new Date()
           },
           {
             spotId: 2,
-            url: 'https://example.com/image4.jpg',
+            url: 'https://picsum.photos/800/600',
             preview: false,
             createdAt: new Date(),
             updatedAt: new Date()
           },
           {
             spotId: 3,
-            url: 'https://example.com/image5.jpg',
+            url: 'https://picsum.photos/800/600',
+            preview: true,
+            createdAt: new Date(),
+            updatedAt: new Date()
+          },
+          {
+            spotId: 4,
+            url: 'https://picsum.photos/800/600',
+            preview: true,
+            createdAt: new Date(),
+            updatedAt: new Date()
+          },
+          {
+            spotId: 5,
+            url: 'https://picsum.photos/800/600',
             preview: true,
             createdAt: new Date(),
             updatedAt: new Date()
@@ -54,7 +68,7 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
       url: {
-        [Op.in]: ['https://example.com/image1.jpg', 'https://example.com/image2.jpg', 'https://example.com/image3.jpg', 'https://example.com/image4.jpg', 'https://example.com/image5.jpg']
+        [Op.in]: ['https://picsum.photos/800/600', 'https://picsum.photos/800/600', 'https://picsum.photos/800/600', 'https://picsum.photos/800/600', 'https://picsum.photos/800/600', 'https://picsum.photos/800/600', 'https://picsum.photos/800/600']
       }
     });
   }

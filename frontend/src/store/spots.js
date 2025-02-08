@@ -2,8 +2,6 @@
 const SET_SPOTS = "spots/setSpots";
 const SET_SPOT_DETAILS = "spots/setSpotDetails"
 
-
-
 const setSpots = (spots) => {
   return {
     type: SET_SPOTS,

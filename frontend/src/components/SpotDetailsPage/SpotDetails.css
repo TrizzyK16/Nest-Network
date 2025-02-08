@@ -1,154 +1,129 @@
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .gen-info-container {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .gen-info-container h2 {
-    font-size: 20px;
-    color: #666;
-  }
-  
-  .spotImageGrid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .main-image {
-    flex: 1;
-    min-width: 50%;
-  }
-  
-  .main-image img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  .other-images {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .other-images img {
-    width: calc(50% - 5px);
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
-  .info-container {
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-  }
-  
-  .hosted-by-info h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
-  
-  .spotDescription p {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-  }
-  
-  .booking-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: #f8f8f8;
-  }
-  
-  .pricing h3 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  .review-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .review-info span {
-    font-size: 18px;
-    color: #ff9800;
-  }
-  
-  .review-info h4 {
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .reserve-button {
-    margin-left: auto;
-  }
-  
-  .reserve-button button {
-    background-color: #ff5a5f;
-    color: white;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .reserve-button button:hover {
-    background-color: #e0484e;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .spotImageGrid {
-      flex-direction: column;
-    }
-  
-    .other-images {
-      flex-direction: column;
-    }
-  
-    .other-images img {
-      width: 100%;
-      height: auto;
-    }
-  
-    .booking-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .reserve-button {
-      width: 100%;
-      text-align: center;
-    }
-  
-    .reserve-button button {
-      width: 100%;
-    }
-  }
-  
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #ddd; /* Outer container border */
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gen-info-container {
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.spotImageGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.main-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border: 2px solid #bbb;
+  border-radius: 10px;
+}
+
+.other-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.other-images img {
+  width: 100%;
+  height: 195px;
+  object-fit: cover;
+  border: 2px solid #bbb;
+  border-radius: 10px;
+}
+
+.info-container {
+  padding: 20px;
+  margin-top: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.hosted-by-info {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.spotDescription {
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 15px;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.booking-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  background: #f8f8f8;
+}
+
+.pricing {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.review-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reserve-button button {
+  background: #ff5a5f;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reserve-button button:hover {
+  background: #e0484d;
+}
+
+.reviews-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.large-review-info {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

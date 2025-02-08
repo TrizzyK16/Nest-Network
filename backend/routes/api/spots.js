@@ -332,7 +332,7 @@ router.get('/:spotid', async (req, res) => {
     // Remove the Reviews array from the final response
     delete spot.dataValues.Reviews;
 
-    return res.json(spot);
+    return res.status(200).json(spot);
 });
 
 
@@ -388,7 +388,7 @@ router.post('/:spotid/reviews', requireAuth, async (req, res) => {
 });
 
 //Get all Reviews by a Spot's id
-router.get('/:spotid/reviews', requireAuth, async (req, res)=>{
+router.get('/:spotid/reviews', async (req, res)=>{
     const spotid = req.params.spotid; // The spot ID from the URL params
 
     const spot = await Spot.findByPk(spotid);
