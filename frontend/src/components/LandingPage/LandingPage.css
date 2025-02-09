@@ -1,27 +1,21 @@
 /* LandingPage.css */
 
-/* General layout */
-.container {
-  min-height: 100vh;
+/*General layout */
+.title {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: #f8f8f8;
-  padding: 20px;
-  border: 2px solid #ccc;
-  /* Added border */
-  border-radius: 10px;
-  /* Optional: Rounded corners for the container */
+  align-items: end;
+  font-size: 10rem;
+  font-weight: bold;
 }
 
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ccc;
-  /* Border below the title */
-  padding-bottom: 10px;
+.greeting {
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-bottom: solid 1px black;
 }
 
 .hamburger-icon {
@@ -38,22 +32,21 @@
 
 .listing-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Dynamically adjust columns */
+  grid-template-columns: repeat(4, 1fr);
+  /* Dynamically adjust columns */
+  margin: 0px 100px;
   gap: 20px;
-  width: 100%;
-  margin-top: 20px;
-  max-width: 1200px;
-  border: 2px solid black;
 }
 
 
 .listing-card {
-  border: 2px solid black;
-  /* Added border */
-  padding: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  width: auto;
   background-color: #fff;
-  border-radius: 10px;
   transition: transform 0.2s ease-in-out;
+  border: 2px solid rgb(151, 148, 148);
+  border-radius: 15px;
 }
 
 .listing-card:hover {
@@ -63,30 +56,14 @@
 .listing-image {
   width: 100%;
   height: auto;
-  border: 2px solid #ddd;
-  /* Added border around the image */
-  border-radius: 8px;
 }
 
-.listing-details {
-  padding: 15px;
-  text-align: center;
-  border-top: 2px solid #ddd;
-  /* Border on top of the listing details */
-  border-bottom: 2px solid #ddd;
-  /* Border at the bottom of the listing details */
-}
-
-.listing-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.listing-price {
-  color: #555;
-  font-size: 1rem;
-  margin-bottom: 10px;
+.price {
+  color: #000000;
+  display: flex;
+  justify-content: left;
+  align-items: baseline;
+  padding-left: 10px
 }
 
 .details-button {
@@ -104,57 +81,32 @@
   background-color: #e0484e;
 }
 
-/* Additional Styling for Stars, City, and Rating */
-.city-state {
-  font-size: 1.1rem;
+
+.location-rating {
+  display: flex;
+  justify-content: space-between;
   color: #333;
-  margin-bottom: 8px;
-  border-bottom: 2px solid #ccc;
-  /* Border below the city/state */
-  padding-bottom: 8px;
   /* Padding to separate the text from the border */
-  border: 2px solid #ddd;
-  /* Added border */
-  padding: 10px;
-}
-
-.star {
-  font-size: 1.5rem;
-  color: #ff5a5f;
+  padding: 0px 10px;
   margin-bottom: 10px;
-  border: 2px solid #ddd;
-  /* Added border to the star section */
-  border-radius: 5px;
-  /* Rounded corners for star container */
-  padding: 5px;
-}
-
-.price {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  border: 2px solid #ddd;
-  /* Added border around the rating */
-  padding: 5px;
-  border-radius: 5px;
-  /* Rounded corners for rating */
-  text-align: center;
 }
 
 
 
 .image {
-  overflow: hidden; /* Ensures the image doesn’t overflow */
-  border: 2px solid black;
-  padding: 0; /* Remove padding to prevent unnecessary expansion */
+  overflow: hidden;
+  /* Ensures the image doesn’t overflow */
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid rgb(151, 148, 148);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures image fills the space without distortion */
-  border-radius: 5px; /* Optional: Keeps it looking nice */
+  object-fit: cover;
+  /* Ensures image fills the space without distortion */
 }

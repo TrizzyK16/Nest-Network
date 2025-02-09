@@ -7,7 +7,7 @@ import "./LandingPage.css";
 
 export default function LandingPage() {
   const spots = useSelector(state => state?.spots?.spot);
-  
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -15,28 +15,31 @@ export default function LandingPage() {
   }, [dispatch]);
 
   return (
-    <div className="container">
-      <h1 className="title">Find Your Perfect Stay</h1>
-
-       <div className="listing-grid">
+    <>
+      <div className="title">
+        <div>
+          <h1 className="greeting">Find Your Perfect Stay</h1>
+        </div>
+      </div>
+      <div className="listing-grid">
         {spots?.map((spot) => (
           <Link key={spot.id} to={`/spots/${spot.id}`} className="listing-card">
             <div className="image">
-                <img src={spot.previewImage} alt={spot.name}/>
+              <img src={spot.previewImage} alt={spot.name} />
             </div>
-            <div className="city-state">
-                <h3>{spot.city}, {spot.state}</h3>
-            </div>
-            <div className="star">
-                <span>⭐ {spot.avgRating}</span>
+            <div className="location-rating">
+              <div>
+                <h3 className="city-state">{spot.city}, {spot.state}</h3>
+              </div>
+              <div>
+                <h3 className="rating">⭐{spot.avgRating}</h3>
+              </div>
             </div>
             <div className="price">
-                <h3>{spot.price}/ night</h3>
+              <h3>${spot.price} night</h3>
             </div>
           </Link>
         ))}
       </div>
-     
-    </div>
-  );
+    </>);
 }

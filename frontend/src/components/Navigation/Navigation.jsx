@@ -16,9 +16,9 @@ function Navigation({ isLoaded }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <nav>
-      <NavLink to="/">Nest Network</NavLink>
 
+    <nav className='nav-bar'>
+      <NavLink className='nav-logo' to="/">Nest Network</NavLink>
       {/* Only show burger menu if no user is logged in */}
       {!sessionUser && (
         <>
