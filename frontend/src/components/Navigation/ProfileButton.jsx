@@ -17,17 +17,23 @@ function ProfileButton({ user }) {
     setShowMenu(!showMenu);
   };
 
-  useEffect(() => {
-    if (!showMenu) return;
-  
-    // const closeMenu = (e) => {
-    //   if (ulRef.current && !ulRef.current.contains(e.target)) {
-    //     setShowMenu(false);
-    //   }
-    // };
-  }, [showMenu]);
-
   const closeMenu = () => setShowMenu(false);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ulRef.current && !ulRef.current.contains(e.target)) {
+        closeMenu();
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showMenu]);
 
   const logout = (e) => {
     e.preventDefault();

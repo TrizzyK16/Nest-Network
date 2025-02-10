@@ -6,20 +6,39 @@ import LoginFormModal from '../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './Navigation.css';
 import { FaBars } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import logo from './images/logo.png';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
+  const navRef = useRef(null);
 
   const toggleMenu = () => setShowMenu((prev) => !prev);
   const closeMenu = () => setShowMenu(false);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showMenu]);
+
   return (
 
-    <nav className='nav-bar'>
-      <NavLink className='nav-logo' to="/"><img src={logo} alt="Icon" className="logo"/>Nest Network</NavLink>
+    <nav className='nav-bar' ref={navRef}>
+      <NavLink className='nav-logo' to="/">
+        <img src={logo} alt="Icon" className="logo"/>Nest Network
+      </NavLink>
       {/* Only show burger menu if no user is logged in */}
       {!sessionUser && (
         <>
@@ -28,7 +47,7 @@ function Navigation({ isLoaded }) {
           </button>
 
           {showMenu && (
-            <>
+            <div className="menu-container" >
               <ul className="session-links">
                 {isLoaded && (
                   <>
@@ -48,14 +67,14 @@ function Navigation({ isLoaded }) {
                 )}
               </ul>
               <div className="backdrop" onClick={closeMenu}></div>
-            </>
+            </div>
           )}
         </>
       )}
 
       {/* Show ProfileButton if user is logged in */}
       {sessionUser && (
-        <ProfileButton user={sessionUser} />
+          <ProfileButton user={sessionUser} />
       )}
     </nav>
   );
