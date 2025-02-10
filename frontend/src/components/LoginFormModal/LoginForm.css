@@ -1,65 +1,63 @@
 /* Centering the modal */
 h1 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Input fields */
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-  }
-  
-  input {
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
 
-  
-  /* Error message */
-  p {
-    color: red;
-    font-size: 14px;
-    margin: 5px 0 0;
-  }
-  
-  /* Submit button */
-  button {
-    background-color: salmon;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-    width: 90px;
-  }
-  
-  button:hover {
-    background-color: salmon;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-  
+/* Input fields */
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+/* Error message */
+p {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0 0;
+}
+
+/* Submit button */
+button {
+  background-color: salmon;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 90px;
+}
+
+button:hover {
+  background-color: salmon;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

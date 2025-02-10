@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchSpotsById } from "../../store/spots"; 
+import { fetchSpotsById } from "../../store/spots";
 import ReviewsBySpot from '../ReviewsBySpot/ReviewsBySpot'
 import './SpotDetails.css'
 
@@ -16,16 +16,16 @@ export default function SpotDetails() {
     }
   }, [dispatch, spotId]);
 
-  if (!spot) return <p>Loading...</p>; 
+  if (!spot) return <p>Loading...</p>;
 
 
   return (
     <div className="container">
       <div className="gen-info-container">
-        <h1 className="title">{spot.name}</h1>
-        <h2>{spot.city}, {spot.state}, {spot.country}</h2>
+        <h1 className="spot-title">{spot.name}</h1>
+        <h2 className="location">{spot.city}, {spot.state}, {spot.country}</h2>
       </div>
-      <div className="spotImageGrid">
+      <div className="spotImages">
         <div className="main-image">
           {spot.SpotImages && spot.SpotImages.length > 0 && (
             (() => {
@@ -43,19 +43,24 @@ export default function SpotDetails() {
         </div>
       </div>
       <div className="info-container">
-        <div className="hosted-by-info">
-          <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
-        </div>
-        <div className="spotDescription">
-          <p>{spot.description}</p>
+        <div className="host-and-description">
+
+          <div className="hosted-by-info">
+            <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+          </div>
+          <div className="spotDescription">
+            <p>{spot.description}</p>
+          </div>
         </div>
         <div className="booking-container">
-          <div className="pricing">
-            <h3>${spot.price}/ night</h3>
-          </div>
-          <div className="review-info">
-            <span>⭐ {spot.avgRating}</span>
-            <h4>{spot.numReviews} reviews</h4>
+          <div className="price-review">
+            <div className="pricing">
+              <h3>${spot.price} night</h3>
+            </div>
+            <div className="review-info">
+              <span>⭐ {spot.avgRating}</span>
+              <h4>{spot.numReviews} reviews</h4>
+            </div>
           </div>
           <div className="reserve-button">
             <button>Reserve</button>
