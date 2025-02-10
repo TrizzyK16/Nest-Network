@@ -7,6 +7,7 @@ import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './Navigation.css';
 import { FaBars } from 'react-icons/fa';
 import { useState } from 'react';
+import logo from './images/logo.png';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -18,7 +19,7 @@ function Navigation({ isLoaded }) {
   return (
 
     <nav className='nav-bar'>
-      <NavLink className='nav-logo' to="/">Nest Network</NavLink>
+      <NavLink className='nav-logo' to="/"><img src={logo} alt="Icon" className="logo"/>Nest Network</NavLink>
       {/* Only show burger menu if no user is logged in */}
       {!sessionUser && (
         <>

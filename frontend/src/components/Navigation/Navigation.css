@@ -1,13 +1,22 @@
 .nav-logo {
     display: flex;
     align-items: center;
-    text-decoration: none
+    text-decoration: none;
+    font-size: 22px;
+    text-decoration: none;
+    color: #fa8072;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 
 .nav-bar {
+    display: flex;
     border-bottom: 1px solid rgb(194, 194, 194);
     height: 50px;
+}
+.logo {
+    max-width: 50px;
+    height: auto;
 }
 
 .hidden {
