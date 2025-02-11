@@ -8,6 +8,7 @@ import SpotDetails from './components/SpotDetailsPage/SpotDetails';
 import ReviewsBySpot from './components/ReviewsBySpot/ReviewsBySpot' 
 import LoginFormModal from './components/LoginFormModal/LoginFormModal';
 import SignupFormModal from './components/SignupFormModal/SignupFormModal';
+import CreateASpotPage from './components/CreateASpotPage/CreateASpot'
 
 function Layout() {
   const dispatch = useDispatch();
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/:spotId/reviews',
         element: <ReviewsBySpot />
+      },
+      {
+        path: '/spots/new',
+        element: <CreateASpotPage />
       },
       {
         path: '*',

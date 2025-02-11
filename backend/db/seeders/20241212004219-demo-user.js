@@ -32,7 +32,14 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password3'),
         firstName: 'Triston',
         lastName: 'Stinky'
-      }
+      },
+      {
+        email: 'demo@user.com',
+        username: 'DemoUser',
+        hashedPassword: bcrypt.hashSync('password'),
+        firstName: 'Demo',
+        lastName: "User"
+      },
     ], { validate: true })
     /**
      * Add seed commands here.

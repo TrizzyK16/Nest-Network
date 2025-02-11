@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton/OpenModalButton';
@@ -7,9 +8,12 @@ import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './Navigation.css';
 import { FaBars } from 'react-icons/fa';
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import * as sessionActions from '../../store/session';
 import logo from './images/logo.png';
 
 function Navigation({ isLoaded }) {
+  const dispatch = useDispatch()
   const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
   const navRef = useRef(null);
@@ -32,6 +36,12 @@ function Navigation({ isLoaded }) {
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showMenu]);
+
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+    closeMenu();
+  };
 
   return (
 
@@ -73,8 +83,16 @@ function Navigation({ isLoaded }) {
       )}
 
       {/* Show ProfileButton if user is logged in */}
-      {sessionUser && (
-          <ProfileButton user={sessionUser} />
+      {sessionUser && sessionUser.id !== 4 &&(
+          <>
+            <Link to='/spots/new'>Create a New Spot</Link>
+            <ProfileButton user={sessionUser} />
+          </>
+      )}
+      {sessionUser && sessionUser.id === 4 && (
+        <>
+          <button onClick={logout}>Log Out</button>
+        </>
       )}
     </nav>
   );

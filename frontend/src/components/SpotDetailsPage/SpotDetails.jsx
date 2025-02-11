@@ -1,14 +1,23 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchSpotsById } from "../../store/spots";
-import ReviewsBySpot from '../ReviewsBySpot/ReviewsBySpot'
-import './SpotDetails.css'
+import { postReview } from "../../store/reviews";
+import ReviewsBySpot from '../ReviewsBySpot/ReviewsBySpot';
+import ReviewModal from '../ReviewModal/ReviewModal'
+import './SpotDetails.css';
 
 export default function SpotDetails() {
   const { spotId } = useParams();
   const spot = useSelector(state => state.spots.spotDetails);
+  const sessionUser = useSelector((state) => state.session.user);
+  const reviews = useSelector(state => state?.reviews?.review?.Reviews);
   const dispatch = useDispatch();
+
+  // State to control the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const userHasReviewed = sessionUser ? reviews?.some(review => review.userId === sessionUser.id) : false;
 
   useEffect(() => {
     if (spotId) {
@@ -18,6 +27,18 @@ export default function SpotDetails() {
 
   if (!spot) return <p>Loading...</p>;
 
+  const handleReviewClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSubmitReview = (reviewData) => {
+    dispatch(postReview(spotId, reviewData));
+  };
+  
 
   return (
     <div className="container">
@@ -44,7 +65,6 @@ export default function SpotDetails() {
       </div>
       <div className="info-container">
         <div className="host-and-description">
-
           <div className="hosted-by-info">
             <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
           </div>
@@ -58,8 +78,11 @@ export default function SpotDetails() {
               <h3>${spot.price} night</h3>
             </div>
             <div className="review-info">
-              <span>⭐ {spot.avgRating}</span>
-              <h4>{spot.numReviews} reviews</h4>
+              {spot.numReviews > 0 ? (
+                <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+              ) : (
+                <span>⭐ New</span>
+              )}
             </div>
           </div>
           <div className="reserve-button">
@@ -69,7 +92,17 @@ export default function SpotDetails() {
       </div>
       <div className="reviews-container">
         <div className="large-review-info">
-          <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+          {spot.numReviews > 0 ? (
+            <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+          ) : (
+            <span>⭐ New</span>
+          )}
+        </div>
+        <div className="review-button">
+          {sessionUser && sessionUser.id !== spot.ownerId && !userHasReviewed && sessionUser.id !== 4 && (
+            <button onClick={handleReviewClick}>Post Your Review</button>
+          )}
+          {isModalOpen && <ReviewModal spotId={spotId} onClose={handleCloseModal} onSubmit={handleSubmitReview} />}
         </div>
         <ReviewsBySpot />
       </div>
