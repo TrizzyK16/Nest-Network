@@ -202,13 +202,12 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 
 //Add an image to a spot based on spot id
 router.post('/:spotId/images', requireAuth, async (req, res)=> {
-    const spotId = req.params.spotId;  // The spot ID from the URL params
+    const spotId = req.params.spotId; 
     const { url, preview } = req.body;
 
     const spot = await Spot.findByPk(spotId);
 
     if (!spot) {
-        // If the spot does not exist, return a 404 error
         return res.status(404).json({
             message: "Spot couldn't be found",
         });
@@ -218,10 +217,12 @@ router.post('/:spotId/images', requireAuth, async (req, res)=> {
         res.status(401).json({error: "Must be owner to edit this spot"})
     }
 
+    const isPreviewImage = preview === true || preview === "true";
+
    const spotImage = await SpotImage.create({
         spotId: spot.id,
-        url: "image url",
-        preview: true
+        url,
+        preview: isPreviewImage
     })
 
     res.status(201).json({

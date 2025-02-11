@@ -45,9 +45,9 @@ module.exports = (sequelize, DataTypes) => {
     indexes: [
       {
         unique: true,
-        fields: ['spotId', 'preview'], // Ensure only one image per spot can have preview: true
+        fields: ['spotId', 'preview'],
         where: {
-          preview: true // Only apply the unique constraint when preview is true
+          preview: true
         }
       }
     ]

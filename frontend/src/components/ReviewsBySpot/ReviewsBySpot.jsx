@@ -7,6 +7,7 @@ import './ReviewsBySpot.css'
 export default function Reviews() {
   const { spotId } = useParams();
   const reviews = useSelector(state => state?.reviews?.review?.Reviews)
+  console.log(reviews)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,11 +20,11 @@ export default function Reviews() {
 
   return (
     <div className="review-container">
-      {reviews.filter(review => review).map((review, index) => (
+      {reviews?.map((review, index) => (
         <div key={index} className="review-item">
-          <h3 className="review-user">{review.User.firstName}</h3>
-          <h4 className="review-date">{review.createdAt}</h4>
-          <p className="review-text">{review.review}</p>
+          <h3 className="review-user">{review?.User?.firstName}</h3>
+          <h4 className="review-date">{review?.createdAt}</h4>
+          <p className="review-text">{review?.review}</p>
         </div>
       ))}
     </div>

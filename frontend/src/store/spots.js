@@ -1,7 +1,11 @@
+import { csrfFetch } from "../store/csrf";
+
 //MUST HAVE CONSTANT THAT WE WILL USE FOR ACTION TYPE
 const SET_SPOTS = "spots/setSpots";
 const SET_SPOT_DETAILS = "spots/setSpotDetails"
 const CREATE_A_NEW_SPOT = 'spot/createSpot'
+const CREATE_SPOT_IMAGES = 'images/spotImages'
+// const SET_USERS_SPOTS = 'spots/usersSpots'
 
 const setSpots = (spots) => {
   return {
@@ -24,6 +28,20 @@ const createANewSpot = (spot) => {
   }
 }
 
+const setImages = (images) => {
+  return {
+      type: CREATE_SPOT_IMAGES,
+      payload: images
+  }
+}
+
+// const setUsersSpots = (spots) => {
+//   return {
+//     type: SET_USERS_SPOTS,
+//     payload: spots
+//   }
+// }
+
 export const fetchSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
   const data = await response.json();
@@ -39,20 +57,49 @@ export const fetchSpotsById = (spotId) => async (dispatch) => {
 };
 
 export const createSpot = (spotData) => async (dispatch) => {
-  const response = await fetch(`/api/spots`, {
+  const response = await csrfFetch(`/api/spots`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // "XSRF-TOKEN": getCookie("XSRF-TOKEN"),
-      },
-    body: JSON.stringify(spotData)
+    },
+    body: JSON.stringify(spotData),
   });
-  const data = await response.json();
-  dispatch(createANewSpot(data))
-  return response;
-}
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("Error creating spot:", errorData);
+    return errorData;
+  }
+
+  if (response.ok) {
+    const newSpot = await response.json();
+    dispatch(createANewSpot(newSpot));
+    return newSpot;
+  }
+};
+
+
+export const createSpotImages = (spotId, imageUrl, preview) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ url: imageUrl, preview: preview}),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setImages(data));
+    return data;
+  } else {
+    console.error("Failed to upload image:", await response.json());
+  }
+};
+
 
 const initialState = {
+  spot: []
 };
 
 const spotReducer = (state = initialState, action) => {
@@ -62,7 +109,9 @@ const spotReducer = (state = initialState, action) => {
     case SET_SPOT_DETAILS:
       return {...state, spotDetails: action.payload}
     case CREATE_A_NEW_SPOT:
-      return { ...state, spot: [...state.spots, action.payload] };
+      return { ...state, spot: [...state.spot, action.payload] };
+    case CREATE_SPOT_IMAGES:
+      return { ...state, spotImages: [...(state.spotImages || []), action.payload] };
     default:
       return state;
   }

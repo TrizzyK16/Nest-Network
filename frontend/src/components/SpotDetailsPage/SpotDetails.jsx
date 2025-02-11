@@ -7,17 +7,16 @@ import ReviewsBySpot from '../ReviewsBySpot/ReviewsBySpot';
 import ReviewModal from '../ReviewModal/ReviewModal'
 import './SpotDetails.css';
 
+//still need to work on page 26 of wireframe
+
 export default function SpotDetails() {
   const { spotId } = useParams();
   const spot = useSelector(state => state.spots.spotDetails);
   const sessionUser = useSelector((state) => state.session.user);
-  const reviews = useSelector(state => state?.reviews?.review?.Reviews);
   const dispatch = useDispatch();
 
   // State to control the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const userHasReviewed = sessionUser ? reviews?.some(review => review.userId === sessionUser.id) : false;
 
   useEffect(() => {
     if (spotId) {
@@ -99,7 +98,7 @@ export default function SpotDetails() {
           )}
         </div>
         <div className="review-button">
-          {sessionUser && sessionUser.id !== spot.ownerId && !userHasReviewed && sessionUser.id !== 4 && (
+          {sessionUser && sessionUser.id !== spot.ownerId && (
             <button onClick={handleReviewClick}>Post Your Review</button>
           )}
           {isModalOpen && <ReviewModal spotId={spotId} onClose={handleCloseModal} onSubmit={handleSubmitReview} />}
