@@ -9,6 +9,9 @@ import ReviewsBySpot from './components/ReviewsBySpot/ReviewsBySpot'
 import LoginFormModal from './components/LoginFormModal/LoginFormModal';
 import SignupFormModal from './components/SignupFormModal/SignupFormModal';
 import CreateASpotPage from './components/CreateASpotPage/CreateASpot'
+import ManageSpotsPage from './components/ManageSpotsPage/ManageSpots'
+import UpdateSpotPage from './components/UpdateSpotPage/UpdateSpot'
+
 
 function Layout() {
   const dispatch = useDispatch();
@@ -55,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: '/spots/new',
         element: <CreateASpotPage />
+      },
+      {
+        path: '/spots/session',
+        element: <ManageSpotsPage />
+      },
+      {
+        path: '/spots/:spotId/edit',
+        element: <UpdateSpotPage />
       },
       {
         path: '*',
