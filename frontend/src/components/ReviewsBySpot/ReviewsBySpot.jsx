@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchReviewsBySpotId } from "../../store/reviews";
+import OpenModalButton from '../OpenModalButton/OpenModalButton';
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal'
 import './ReviewsBySpot.css'
 
-export default function Reviews() {
-  const { spotId } = useParams();
+export default function Reviews({spotId}) {
   const reviews = useSelector(state => state?.reviews?.review?.Reviews)
-  console.log(reviews)
+  const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,6 +25,14 @@ export default function Reviews() {
           <h3 className="review-user">{review?.User?.firstName}</h3>
           <h4 className="review-date">{review?.createdAt}</h4>
           <p className="review-text">{review?.review}</p>
+          {review?.User?.id === sessionUser?.id && (
+            <div className="delete-container">
+              <OpenModalButton
+                buttonText='delete'
+                modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId}/>}
+              />
+            </div>
+          )}
         </div>
       ))}
     </div>

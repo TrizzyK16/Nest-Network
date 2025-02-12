@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 //MUST HAVE CONSTANT THAT WE WILL USE FOR ACTION TYPE
 const SET_REVIEWS = 'reviews/setReviews';
-const ADD_REVIEW = "reviews/ADD_REVIEW";
+const ADD_REVIEW = "reviews/addReviews";
 
 const setReviews = (reviews) => {
     return {
@@ -10,10 +10,12 @@ const setReviews = (reviews) => {
     };
 };
 
-const addReview = (review) => ({
-    type: ADD_REVIEW,
-    review,
-  });
+const addReview = (review) => {
+    return {
+      type: ADD_REVIEW,
+      review,
+    }
+  };
 
 export const fetchReviewsBySpotId = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}/reviews`);
@@ -34,12 +36,27 @@ export const postReview = (spotId, reviewData) => async (dispatch) => {
     if (response.ok) {
       const newReview = await response.json();
       dispatch(addReview(newReview));
+      dispatch(fetchReviewsBySpotId(spotId))
       return newReview;
     } else {
       const errors = await response.json();
       return errors;
     }
   };
+
+export const deleteReview = (reviewId, spotId) => async (dispatch) =>{
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  const deletedReview = await response.json()
+  if(deleteReview){
+    dispatch(fetchReviewsBySpotId(spotId))
+    return deletedReview
+  }
+}
   
 
 const initialState = {};

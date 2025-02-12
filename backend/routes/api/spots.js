@@ -406,11 +406,10 @@ router.get('/:spotid/reviews', async (req, res)=>{
         include: [
             {model: User, attributes: ["id", "firstName", "lastName"]},
              {model: ReviewImage, attributes: ["id", "url"]}
-            ]
+            ],
+        order: [["createdAt", "DESC"]]
     })
-
     res.json({"Reviews": reviews})
-    
 })
 
 // Get all bookings for a spot based on the spot's id

@@ -1,6 +1,6 @@
 import './ManageSpots.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect} from 'react'
 import { currentUsersSpots } from '../../store/spots'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom';
@@ -23,7 +23,6 @@ export default function ManageSpots(){
     const updateForm = (spotId) => {
         navigate(`/spots/${spotId}/edit`)
     }
-
 
     return (
         <div className='container'>

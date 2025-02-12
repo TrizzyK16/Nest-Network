@@ -12,6 +12,7 @@ import './SpotDetails.css';
 export default function SpotDetails() {
   const { spotId } = useParams();
   const spot = useSelector(state => state.spots.spotDetails);
+  const reviews = useSelector(state => state?.reviews?.review?.Reviews)
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -22,7 +23,8 @@ export default function SpotDetails() {
     if (spotId) {
       dispatch(fetchSpotsById(spotId));
     }
-  }, [dispatch, spotId]);
+    
+  }, [dispatch, spotId, reviews]);
 
   if (!spot) return <p>Loading...</p>;
 
@@ -78,7 +80,7 @@ export default function SpotDetails() {
             </div>
             <div className="review-info">
               {spot.numReviews > 0 ? (
-                <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+                <span>⭐ {spot.avgRating} {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
               ) : (
                 <span>⭐ New</span>
               )}
@@ -92,7 +94,7 @@ export default function SpotDetails() {
       <div className="reviews-container">
         <div className="large-review-info">
           {spot.numReviews > 0 ? (
-            <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+            <span>⭐ {spot.avgRating} {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
           ) : (
             <span>⭐ New</span>
           )}
@@ -103,7 +105,7 @@ export default function SpotDetails() {
           )}
           {isModalOpen && <ReviewModal spotId={spotId} onClose={handleCloseModal} onSubmit={handleSubmitReview} />}
         </div>
-        <ReviewsBySpot />
+        <ReviewsBySpot spotId={spotId}/>
       </div>
     </div>
   );

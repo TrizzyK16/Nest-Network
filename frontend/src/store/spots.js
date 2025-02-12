@@ -7,7 +7,6 @@ const CREATE_A_NEW_SPOT = 'spot/createSpot'
 const CREATE_SPOT_IMAGES = 'images/spotImages'
 const SET_USERS_SPOTS = 'spots/usersSpots'
 const UPDATE_SPOT = 'spot/updateSpot'
-const DELETE_SPOT = 'spot/deleteSpot'
 
 const setSpots = (spots) => {
   return {
@@ -51,12 +50,7 @@ const updateSpot = (spot) => {
   }
 }
 
-const deleteSpot = (spotId) => {
-  return {
-    type: DELETE_SPOT,
-    payload: spotId
-  }
-}
+
 
 export const fetchSpots = () => async (dispatch) => {
   const response = await fetch("/api/spots");
@@ -141,10 +135,12 @@ export const deleteASpot = (spotId) => async (dispatch) => {
     },
   })
   const deletedSpot = await response.json()
-  dispatch(deleteSpot(deletedSpot))
-  return deletedSpot
+  if(deletedSpot){
+    dispatch(currentUsersSpots())
+    return deletedSpot
+  }
+  
 }
-
 
 const initialState = {
   spot: [],
@@ -169,11 +165,6 @@ const spotReducer = (state = initialState, action) => {
         spot: state.spot.map((s) =>
           s.id === action.payload.id ? action.payload : s
         ),
-      };
-    case DELETE_SPOT:
-      return {
-        ...state,
-        spots: state.spot.filter((s) => s.id !== action.payload),
       };
     default:
       return state;
