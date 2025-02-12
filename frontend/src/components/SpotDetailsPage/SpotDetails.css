@@ -117,7 +117,7 @@
 .reserve-button button {
   background: #ff5a5f;
   color: white;
-  width: 370px;
+  width: 275px;
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 2px 2px black;
@@ -130,4 +130,17 @@
 .reviews-container {
   display: flex;
   flex-direction: column;
+}
+
+.review-button {
+  padding-bottom: 4px;
+  border-bottom: 2px solid grey;
+}
+
+.review {
+  box-shadow: 2px 2px black;
+}
+
+.review-button button:hover {
+  background: #e0484d;
 }

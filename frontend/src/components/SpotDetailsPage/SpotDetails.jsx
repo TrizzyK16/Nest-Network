@@ -79,28 +79,28 @@ export default function SpotDetails() {
             </div>
             <div className="review-info">
               {spot.numReviews > 0 ? (
-                <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+                <span>⭐ {spot.avgRating} - {spot.numReviews} reviews</span>
               ) : (
                 <span>⭐ New</span>
               )}
             </div>
           </div>
           <div className="reserve-button">
-            <button>Reserve</button>
+            <button className="reserve">Reserve</button>
           </div>
         </div>
       </div>
       <div className="reviews-container">
         <div className="large-review-info">
           {spot.numReviews > 0 ? (
-            <span>⭐ {spot.avgRating} {spot.numReviews} reviews</span>
+            <span>⭐ {spot.avgRating} - {spot.numReviews} reviews</span>
           ) : (
             <span>⭐ New</span>
           )}
         </div>
         <div className="review-button">
           {sessionUser && sessionUser.id !== spot.ownerId && !userHasReviewed && sessionUser.id !== 4 && (
-            <button onClick={handleReviewClick}>Post Your Review</button>
+            <button onClick={handleReviewClick} className="review">Post Your Review</button>
           )}
           {isModalOpen && <ReviewModal spotId={spotId} onClose={handleCloseModal} onSubmit={handleSubmitReview} />}
         </div>

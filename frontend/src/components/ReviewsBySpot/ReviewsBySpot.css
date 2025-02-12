@@ -25,6 +25,7 @@
 .review-text {
   font-size: 1rem;
   line-height: 1.5;
+  border-bottom: 2px solid grey;
 }
 
 .large-review-info {

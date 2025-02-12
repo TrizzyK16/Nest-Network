@@ -54,7 +54,7 @@ function ProfileButton({ user }) {
             <ul className='ul-info'>
               <p className='ul-sub-info'>Hello, {user.firstName}</p>
               <p className='ul-sub-info'>{user.email}</p>
-              <div className='ul-sub-info'>
+              <div className="ul-sub-info">
                 <Link to="/manage-spots" className='manage-spots-link'>Manage Spots</Link>
               </div>
               <div className='ul-sub-info'>
