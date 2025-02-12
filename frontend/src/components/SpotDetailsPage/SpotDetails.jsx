@@ -80,7 +80,7 @@ export default function SpotDetails() {
             </div>
             <div className="review-info">
               {spot.numReviews > 0 ? (
-                <span>⭐ {spot.avgRating} {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
+                <span>⭐ {spot.avgRating} · {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
               ) : (
                 <span>⭐ New</span>
               )}
@@ -94,7 +94,7 @@ export default function SpotDetails() {
       <div className="reviews-container">
         <div className="large-review-info">
           {spot.numReviews > 0 ? (
-            <span>⭐ {spot.avgRating} {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
+            <span>⭐ {spot.avgRating} · {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
           ) : (
             <span>⭐ New</span>
           )}

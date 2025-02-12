@@ -85,7 +85,7 @@ function Navigation({ isLoaded }) {
       {/* Show ProfileButton if user is logged in */}
       {sessionUser && sessionUser.id !== 4 &&(
           <>
-            <Link to='/spots/new'>Create a New Spot</Link>
+            <Link to='/spots/new' className='new-spot-text'>Create a New Spot</Link>
             <ProfileButton user={sessionUser} />
           </>
       )}

@@ -40,22 +40,29 @@ p {
   margin: 5px 0 0;
 }
 
-/* Submit button */
+
 button {
   background-color: salmon;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 5px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
-  width: 90px;
+  width: 85px;
 }
 
 
+/* .log-in-button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 90px;
+} */
+
 button:hover {
-  background-color: salmon;
+  background: #e0484d;
 }
 
 button:disabled {
