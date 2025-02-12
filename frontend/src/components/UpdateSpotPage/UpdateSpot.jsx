@@ -12,21 +12,22 @@ export default function UpdateSpot() {
   const { spotId } = useParams();
 
   const sessionUser = useSelector((state) => state.session.user);
+  const spot = useSelector(state => state.spots.spotDetails)
 
-  const [address, setAddress] = useState('')
-  const [city, setCity] = useState('')
-  const [state, setState] = useState('')
-  const [country, setCountry] = useState('')
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState()
-  const [description, setDescription] = useState('')
-  const [image1, setImage1] = useState()
-  const [image2, setImage2] = useState()
-  const [image3, setImage3] = useState()
-  const [image4, setImage4] = useState()
-  const [image5, setImage5] = useState()
-  const [lat, setLat] = useState()
-  const [lng, setLng] = useState()
+  const [address, setAddress] = useState(spot.address)
+  const [city, setCity] = useState(spot.city)
+  const [state, setState] = useState(spot.state)
+  const [country, setCountry] = useState(spot.country)
+  const [name, setName] = useState(spot.name)
+  const [price, setPrice] = useState(spot.price)
+  const [description, setDescription] = useState(spot.description)
+  const [image1, setImage1] = useState(spot?.SpotImages[0]?.url)
+  const [image2, setImage2] = useState(spot?.SpotImages[1]?.url)
+  const [image3, setImage3] = useState(spot?.SpotImages[2]?.url)
+  const [image4, setImage4] = useState(spot?.SpotImages[3]?.url)
+  const [image5, setImage5] = useState(spot?.SpotImages[4]?.url)
+  const [lat, setLat] = useState(spot.lat)
+  const [lng, setLng] = useState(spot.lng)
 
 
   const [errors, setErrors] = useState({});
