@@ -41,24 +41,24 @@ export default function NewSpotForm() {
     if (!description || description.length < 30) newErrors.description = "Description must be at least 30 characters.";
     if (!name) newErrors.name = "Spot name is required.";
     if (!price || price <= 0) newErrors.price = "Price must be a positive number.";
-    if(!image1) newErrors.previewImage = 'Must include a preview image'
- 
+    if (!image1) newErrors.previewImage = 'Must include a preview image'
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newSpot = {country, address, city, state, lat, lng, description, name, price}
-   if(!validateForm()){
-    return
-   }
+    const newSpot = { country, address, city, state, lat, lng, description, name, price }
+    if (!validateForm()) {
+      return
+    }
     const response = await dispatch(createSpot(newSpot))
-    if(response){
+    if (response) {
       const imageArray = [image1, image2, image3, image4, image5]
-      imageArray.map(async (image, i) =>{
+      imageArray.map(async (image, i) => {
         let preview = false;
-        if(i === 0){
+        if (i === 0) {
           preview = true
         }
         await dispatch(createSpotImages(response.id, image, preview))
@@ -66,42 +66,61 @@ export default function NewSpotForm() {
       navigate(`/spots/${response.id}`)
     }
   }
-  
-  
+
+
   return (
     <div className="new-spot-container">
       <h1>Create a New Spot</h1>
       <form onSubmit={handleSubmit}>
         <h2>Where is your place located?</h2>
         <p>Guests will only get your exact address once they book a reservation.</p>
-        
-        {errors.country && <p className="error">{errors.country}</p>}
-        <input type="text" name="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
 
-        {errors.address && <p className="error">{errors.address}</p>}
-        <input type="text" name="address" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+        <div className="location-grid">
 
-        <div className="city-state">
-          {errors.city && <p className="error">{errors.city}</p>}
-          <input type="text" name="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
-          <p>,</p>
 
-          {errors.state && <p className="error">{errors.state}</p>}
-          <input type="text" name="state" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
-        </div>
+          <div>
+            Country
+            {errors.country && <p className="error">{errors.country}</p>}
+            <input className="_country" type="text" name="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
+          </div>
+          <div>
+            Street
+            {errors.address && <p className="error">{errors.address}</p>}
+            <input className="_address" type="text" name="address" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+          </div>
+          <div className="city-state">
+            <div className="_city">
+              City
+              {errors.city && <p className="error">{errors.city}</p>}
+              <input type="text" name="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
+            <p id="comma">,</p>
+            <div className="_state">
+              State
+              {errors.state && <p className="error">{errors.state}</p>}
+              <input type="text" name="state" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
+            </div>
+          </div>
 
-        <div className="lat-lng">
-          {errors.lat && <p className="error">{errors.lat}</p>}
-          <input type="text" name="lat" placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
-          <p>,</p>
+          <div className="lat-lng">
+            <div className="_lat">
+              Latitude
+              {errors.lat && <p className="error">{errors.lat}</p>}
+              <input type="text" name="lat" placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
+            </div>
+            <p id="comma">,</p>
 
-          {errors.lng && <p className="error">{errors.lng}</p>}
-          <input type="text" name="lng" placeholder="Longitude" value={lng} onChange={(e) => setLng(e.target.value)} />
+            <div className="_lng">
+              Longitude
+              {errors.lng && <p className="error">{errors.lng}</p>}
+              <input type="text" name="lng" placeholder="Longitude" value={lng} onChange={(e) => setLng(e.target.value)} />
+            </div>
+          </div>
         </div>
 
         <h2>Describe your place to guests</h2>
         {errors.description && <p className="error">{errors.description}</p>}
-        <textarea name="description" placeholder="Please write at least 30 characters" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <textarea className="text-area" name="description" placeholder="Please write at least 30 characters" value={description} onChange={(e) => setDescription(e.target.value)} />
 
         <h2>Create a title for your spot</h2>
         {errors.name && <p className="error">{errors.name}</p>}
@@ -116,18 +135,21 @@ export default function NewSpotForm() {
 
         <h2>Liven up your spot with photos</h2>
         <p>Submit a link to at least one photo to publish your spot.</p>
-
-        <div>
-          {errors.previewImage && <p className="error">{errors.previewImage}</p>}
-          <input type="text" placeholder="Preview Image URL" value={image1} onChange={(e) => setImage1(e.target.value)} />
-          <input type="text" placeholder="Image URL" value={image2} onChange={(e) => setImage2(e.target.value)} />
-          <input type="text" placeholder="Image URL" value={image3} onChange={(e) => setImage3(e.target.value)} />
-          <input type="text" placeholder="Image URL" value={image4} onChange={(e) => setImage4(e.target.value)} />
-          <input type="text" placeholder="Image URL" value={image5} onChange={(e) => setImage5(e.target.value)} />
+        <div className="image-container">
+          <div className="images">
+            {errors.previewImage && <p className="error">{errors.previewImage}</p>}
+            <input type="text" placeholder="Preview Image URL" value={image1} onChange={(e) => setImage1(e.target.value)} />
+            <input type="text" placeholder="Image URL" value={image2} onChange={(e) => setImage2(e.target.value)} />
+            <input type="text" placeholder="Image URL" value={image3} onChange={(e) => setImage3(e.target.value)} />
+            <input type="text" placeholder="Image URL" value={image4} onChange={(e) => setImage4(e.target.value)} />
+            <input type="text" placeholder="Image URL" value={image5} onChange={(e) => setImage5(e.target.value)} />
+          </div>
         </div>
+        <div className="button-box">
 
-        {sessionUser && <button type="submit">Create Spot</button>}
-      </form>
-    </div>
+          {sessionUser && <button type="submit">Create Spot</button>}
+        </div>
+      </form >
+    </div >
   );
 }
