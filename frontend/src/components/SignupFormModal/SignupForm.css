@@ -1,0 +1,31 @@
+.sign-up-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sign-up-title {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.sign-up-inputs input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+}
+
+.sign-up-submit {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.sign-up-submit button {
+    color: white;
+    background-color: #ff5a5f;
+    width: 100%;
+    padding: 10px;
+}
