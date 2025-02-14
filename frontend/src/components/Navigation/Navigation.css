@@ -58,23 +58,17 @@
     margin: 10px;
 }
 
-/* .session-links {
-    border: 1px solid black;
-    background-color: blanchedalmond;
-    object-fit: fill
-} */
-
 .login-link {
     position: absolute;
     padding: 3px;
-    left: 3px;
-    top: 3px
+    left: 9px;
+    top: 3px;
 }
 
 .signup-link  {
     position: absolute;
     padding: 3px;
-    left: 3px;
+    left: 9px;
     top: 37px
 }
 

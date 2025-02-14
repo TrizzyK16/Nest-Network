@@ -6,6 +6,7 @@ import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal/LoginFormModal';
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import { Link } from 'react-router-dom';
+import './ProfileButton.css'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,13 +40,14 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    window.location.href = '/';
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <div className="profile">
-      <button onClick={toggleMenu}>
+      <button onClick={toggleMenu} className='profile-button'>
         <FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -58,7 +60,7 @@ function ProfileButton({ user }) {
                 <Link to="/spots/session" className='manage-spots-link'>Manage Spots</Link>
               </div>
               <div className='ul-sub-info'>
-                <button onClick={logout}>Log Out</button>
+                <button onClick={logout} className='logout-button'>Log Out</button>
               </div>
             </ul>
           </div>

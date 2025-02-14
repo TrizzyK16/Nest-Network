@@ -6,6 +6,7 @@ import "./ReviewModal.css";
 export default function ReviewModal({ spotId, onClose }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const reviewers = useSelector((state) => state?.reviews?.review?.Reviews);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const [errors, setErrors] = useState([]);
@@ -14,6 +15,12 @@ export default function ReviewModal({ spotId, onClose }) {
 
   const handleSubmit = async () => {
     const validationErrors = [];
+
+    reviewers.forEach(review => {
+      if (review.userId === sessionUser.id) {
+        validationErrors.push("Review already exists for this spot")
+      }
+  })
 
     if (sessionUser.id === 4) {
       validationErrors.push("Cannot post a review as a demo user");

@@ -39,10 +39,14 @@ export default function SpotDetails() {
   const handleSubmitReview = (reviewData) => {
     dispatch(postReview(spotId, reviewData));
   };
+
+  const handleAlert = () => {
+    alert("Feature Coming Soon...")
+  }
   
 
   return (
-    <div className="container">
+    <div className="container-sd">
       <div className="gen-info-container">
         <h1 className="spot-title">{spot.name}</h1>
         <h2 className="location">{spot.city}, {spot.state}, {spot.country}</h2>
@@ -87,7 +91,7 @@ export default function SpotDetails() {
             </div>
           </div>
           <div className="reserve-button">
-            <button>Reserve</button>
+            <button onClick={() => handleAlert()}>Reserve</button>
           </div>
         </div>
       </div>

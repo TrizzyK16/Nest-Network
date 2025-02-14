@@ -1,14 +1,15 @@
 /* Centering the modal */
-h1 {
+.login-text {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
 }
 
-form {
+.submit-form {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  gap: 15px;
+  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   background: white;
@@ -16,123 +17,32 @@ form {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.location-grid {
-  display: flex;
-  flex-direction: column;
-}
-
-._country {
-  width: 98%;
-  padding: 5px;
-  margin: 5px 0;
-
-}
-
-._address {
-  width: 98%;
-  padding: 5px;
-  margin: 5px 0px;
-}
-
-.city-state {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 5px;
-
-}
-
-._city {
-  display: flex;
-  flex-direction: column;
-  margin: 5px 0px;
-  width: 65%;
-  margin: 5px 0px;
-}
-
-#comma {
-  width: 5px;
-  display: flex;
-  align-items: end;
-  color: red;
-  font-size: 20px;
-  margin-bottom: 0;
-  margin-right: 10px;
-}
-
-
-
-._state {
-  display: flex;
-  flex-direction: column;
-  margin: 5px 0px;
-  width: 30%;
-  margin: 5px 0px;
-}
-
-.lat-lng {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-bottom: 20px;
-  border-bottom: 2px solid rgb(138, 138, 138);
-
-}
-
-._lat {
-  display: flex;
-  flex-direction: column;
-  width: 47.5%;
-}
-
-._lng {
-  display: flex;
-  flex-direction: column;
-  width: 47.5%;
-}
-
-.text-area {
-  height: 100px;
-
-}
-
-.image-container {
-  padding-bottom: 20px;
-  border-bottom: 2px solid rgb(138, 138, 138);
-}
-
-.images {
-  display: flex;
-  flex-direction: column;
-}
-
 /* Input fields */
-label {
+.input-label {
   display: flex;
   flex-direction: column;
   font-weight: bold;
 }
 
-input {
+.user-input .password-input {
+  padding: 10px;
+  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  padding: 5px;
-  width: auto;
-  margin: 5px 0;
-}
-
-.price-section {
-  display: flex;
-  flex-direction: row;
 }
 
 
 /* Error message */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0 0;
+}
 
 
-button {
-  background-color: salmon;
+.login-button, .demo-button {
+  background-color: #ff5a5f;
   color: white;
   border: none;
   padding: 5px;
@@ -140,13 +50,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
-  width: 150px;
-}
-
-.button-box {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+  width: 85px;
 }
 
 
@@ -157,11 +61,20 @@ button {
   width: 90px;
 } */
 
-button:hover {
+.login-button:hover {
   background: #e0484d;
 }
 
-button:disabled {
+.login-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.demo-button:hover {
+  background: #e0484d;
+}
+
+.demo-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }

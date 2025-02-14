@@ -9,16 +9,24 @@ import './LoginForm.css';
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const handleSubmit = (e) => {
+  // const validateForm = () => {
+  //   const newErrors = {};
+  // }
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
     setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
+      .then(() => {
+        closeModal;
+        window.location.href = '/'
+      })
       .catch(async (res) => {
         const data = await res.json();
         // console.log("API response:", data); // Debugging
@@ -30,7 +38,13 @@ function LoginFormModal() {
         } else {
           setErrors({ general: "The provided credentials were invalid." }); // Fallback message
         }
-      });
+      }
+       );
+  //   const response = await dispatch(sessionActions.login({ credential, password }))
+  //     if (response) {
+  //       closeModal;
+  //       navigate('/');
+  //     }
   };
 
   useEffect(() => {}, [errors]);
@@ -50,21 +64,23 @@ function LoginFormModal() {
 
   return (
     <>
-      <h1>Log In</h1>
+      <h1 className='login-text'>Log In</h1>
       <p className='error-message'>{errors.general}</p>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className='submit-form'>
+        <label className='input-label'>
           Username or Email
           <input
+            className='user-input'
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
           />
         </label>
-        <label>
+        <label className='input-label'>
           Password
           <input
+            className='password-input'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -72,13 +88,13 @@ function LoginFormModal() {
           />
         </label>
         {errors.credential && (
-          <p>{errors.credential}</p>
+          <p className='error-message'>{errors.credential}</p>
         )}
-        <div className='log-in-button'>
-          <button type="submit">Log In</button>
+        <div className='login-button-div'>
+          <button type="submit" className='login-button'>Log In</button>
         </div>
         <div className='demo-user-button'>
-          <button type="button" onClick={handleDemoLogin}>Demo User</button>
+          <button type="button" onClick={handleDemoLogin} className='demo-button'>Demo User</button>
         </div>
       </form>
     </>

@@ -16,26 +16,26 @@ export default function LandingPage() {
 
   return (
     <>
-      <div className="title">
+      <div className="title-lp">
         <div>
-          <h1 className="greeting">Find Your Perfect Stay</h1>
+          <h1 className="greeting-lp">Find Your Perfect Stay</h1>
         </div>
       </div>
-      <div className="listing-grid">
+      <div className="listing-grid-lp">
         {spots?.map((spot) => (
-          <Link key={spot.id} to={`/spots/${spot.id}`} className="listing-card">
-            <div className="image">
+          <Link key={spot.id} to={`/spots/${spot.id}`} className="listing-card-lp">
+            <div className="image-lp">
               <img src={spot.previewImage} alt={spot.name} />
             </div>
-            <div className="location-rating">
+            <div className="location-rating-lp">
               <div>
-                <h3 className="city-state">{spot.city}, {spot.state}</h3>
+                <h3 className="city-state-lp">{spot.city}, {spot.state}</h3>
               </div>
               <div>
-                <h3 className="rating">⭐{spot.avgRating}</h3>
+                <h3 className="rating-lp">⭐{spot.avgRating}</h3>
               </div>
             </div>
-            <div className="price">
+            <div className="price-lp">
               <h3>${spot.price} night</h3>
             </div>
           </Link>

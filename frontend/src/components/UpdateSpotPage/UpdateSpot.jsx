@@ -34,6 +34,7 @@ export default function UpdateSpot() {
 
   const validateForm = () => {
     const newErrors = {};
+    const validImageExtensions = /.(png|jpg|jpeg)$/i;
 
     if (!country) newErrors.country = "Country is required.";
     if (!address) newErrors.address = "Street address is required.";
@@ -44,8 +45,16 @@ export default function UpdateSpot() {
     if (!description || description.length < 30) newErrors.description = "Description must be at least 30 characters.";
     if (!name) newErrors.name = "Spot name is required.";
     if (!price || price <= 0) newErrors.price = "Price must be a positive number.";
-    if(!image1) newErrors.previewImage = 'Must include a preview image'
- 
+    if (!image1) newErrors.previewImage = "Must include a preview image.";
+
+    // Image URL validation
+    const imageArray = [image1, image2, image3, image4, image5];
+    imageArray.forEach((image, index) => {
+      if (image && !validImageExtensions.test(image)) {
+        newErrors[`image${index + 1}`] = "Image URL needs to end in .png, .jpg, or .jpeg.";
+      }
+    });
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -117,13 +126,22 @@ export default function UpdateSpot() {
                 <h2>Liven up your spot with photos</h2>
                 <p>Submit a link to at least one photo to publish your spot.</p>
 
-                <div>
-                {errors.previewImage && <p className="error">{errors.previewImage}</p>}
-                <input type="text" placeholder="Image URL" value={image1} onChange={(e) => setImage1(e.target.value)} />
-                <input type="text" placeholder="Image URL" value={image2} onChange={(e) => setImage2(e.target.value)} />
-                <input type="text" placeholder="Image URL" value={image3} onChange={(e) => setImage3(e.target.value)} />
-                <input type="text" placeholder="Image URL" value={image4} onChange={(e) => setImage4(e.target.value)} />
-                <input type="text" placeholder="Image URL" value={image5} onChange={(e) => setImage5(e.target.value)} />
+                <div className="images-us">
+                    {errors.previewImage && <p className="error">{errors.previewImage}</p>}
+                    {errors.image1 && <p className="error">{errors.image1}</p>}
+                    <input type="text" placeholder="Preview Image URL" value={image1} onChange={(e) => setImage1(e.target.value)} />
+
+                    {errors.image2 && <p className="error">{errors.image2}</p>}
+                    <input type="text" placeholder="Image URL" value={image2} onChange={(e) => setImage2(e.target.value)} />
+
+                    {errors.image3 && <p className="error">{errors.image3}</p>}
+                    <input type="text" placeholder="Image URL" value={image3} onChange={(e) => setImage3(e.target.value)} />
+
+                    {errors.image4 && <p className="error">{errors.image4}</p>}
+                    <input type="text" placeholder="Image URL" value={image4} onChange={(e) => setImage4(e.target.value)} />
+
+                    {errors.image5 && <p className="error">{errors.image5}</p>}
+                    <input type="text" placeholder="Image URL" value={image5} onChange={(e) => setImage5(e.target.value)} />
                 </div>
 
                 {sessionUser && <button type="submit">Create Spot</button>}

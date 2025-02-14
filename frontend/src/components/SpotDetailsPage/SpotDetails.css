@@ -1,6 +1,10 @@
-.container {
+.container-sd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1000px;
   width: auto;
-  margin: 75px;
+  margin: auto;
   background: #fff;
 }
 
@@ -117,8 +121,9 @@
 .reserve-button button {
   background: #ff5a5f;
   color: white;
-  width: 275px;
+  width: 200px;
   font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
   box-shadow: 2px 2px black;
 }
@@ -138,6 +143,21 @@
 }
 
 .review {
+  box-shadow: 2px 2px black;
+}
+
+.review-button button {
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: auto;
+  height: 33px;
+  border: 2px solid black;
   box-shadow: 2px 2px black;
 }
 
