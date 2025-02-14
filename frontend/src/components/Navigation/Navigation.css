@@ -43,34 +43,27 @@
 }
 
 .session-links {
-    position: absolute;
-    right: 10px;
-    top: 35px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
     border: 2px solid black;
     border-radius: 4.25px;
     background-color: white;
-    width: 58px;
-    height: 75px
-}
-
-.session-links.active {
+    width: 110px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    padding: 6px; /* Add padding to ensure space around the links */
+    margin-top: 25%;
+  }
+  
+  .session-links.active {
     display: flex;
-    margin: 10px;
-}
-
-.login-link {
-    position: absolute;
-    padding: 3px;
-    left: 9px;
-    top: 3px;
-}
-
-.signup-link  {
-    position: absolute;
-    padding: 3px;
-    left: 9px;
-    top: 37px
-}
+  }
+  
+  .login-link, .signup-link {
+    margin: 5px 0; /* Add vertical space between links */
+    text-align: center; /* Center text within links */
+  }
 
 .profile-dropdown {
     position: absolute;

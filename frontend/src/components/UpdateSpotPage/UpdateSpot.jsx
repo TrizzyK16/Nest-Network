@@ -11,23 +11,23 @@ export default function UpdateSpot() {
   const navigate = useNavigate();
   const { spotId } = useParams();
 
-  const sessionUser = useSelector((state) => state.session.user);
-  const spot = useSelector(state => state.spots.spotDetails)
+  const sessionUser = useSelector((state) => state?.session?.user);
+  const spot = useSelector(state => state?.spots?.spotDetails)
 
-  const [address, setAddress] = useState(spot.address)
-  const [city, setCity] = useState(spot.city)
-  const [state, setState] = useState(spot.state)
-  const [country, setCountry] = useState(spot.country)
-  const [name, setName] = useState(spot.name)
-  const [price, setPrice] = useState(spot.price)
-  const [description, setDescription] = useState(spot.description)
+  const [address, setAddress] = useState(spot?.address)
+  const [city, setCity] = useState(spot?.city)
+  const [state, setState] = useState(spot?.state)
+  const [country, setCountry] = useState(spot?.country)
+  const [name, setName] = useState(spot?.name)
+  const [price, setPrice] = useState(spot?.price)
+  const [description, setDescription] = useState(spot?.description)
   const [image1, setImage1] = useState(spot?.SpotImages[0]?.url)
   const [image2, setImage2] = useState(spot?.SpotImages[1]?.url)
   const [image3, setImage3] = useState(spot?.SpotImages[2]?.url)
   const [image4, setImage4] = useState(spot?.SpotImages[3]?.url)
   const [image5, setImage5] = useState(spot?.SpotImages[4]?.url)
-  const [lat, setLat] = useState(spot.lat)
-  const [lng, setLng] = useState(spot.lng)
+  const [lat, setLat] = useState(spot?.lat)
+  const [lng, setLng] = useState(spot?.lng)
 
 
   const [errors, setErrors] = useState({});
@@ -78,74 +78,96 @@ export default function UpdateSpot() {
         }
     }
     return (
-        <div className="new-spot-container">
-            <h1>Update your Spot</h1>
-            <form onSubmit={handleSubmit}>
-                <h2>Where is your place located?</h2>
-                <p>Guests will only get your exact address once they book a reservation.</p>
-                
-                {errors.country && <p className="error">{errors.country}</p>}
-                <input type="text" name="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
+      <div className="new-spot-container">
+      <h1 className="spot-header">Create a New Spot</h1>
+      <form onSubmit={handleSubmit} className="create-spot-form">
+        <h2>Where is your place located?</h2>
+        <p>Guests will only get your exact address once they book a reservation.</p>
 
-                {errors.address && <p className="error">{errors.address}</p>}
-                <input type="text" name="address" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+        <div className="location-grid">
 
-                <div className="city-state">
-                {errors.city && <p className="error">{errors.city}</p>}
-                <input type="text" name="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
-                <p>,</p>
 
-                {errors.state && <p className="error">{errors.state}</p>}
-                <input type="text" name="state" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
-                </div>
+          <div className="country-div">
+            Country
+            {errors.country && <p className="error">{errors.country}</p>}
+            <input className="_country" type="text" name="country" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
+          </div>
+          <div>
+            Street
+            {errors.address && <p className="error">{errors.address}</p>}
+            <input className="_address" type="text" name="address" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+          </div>
+          <div className="city-state">
+            <div className="city-div">
+              City
+              {errors.city && <p className="error">{errors.city}</p>}
+              <input className="_city" type="text" name="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
+            <p className="comma-1">,</p>
+            <div className="state-div">
+              State
+              {errors.state && <p className="error">{errors.state}</p>}
+              <input className="_state" type="text" name="state" placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
+            </div>
+          </div>
 
-                <div className="lat-lng">
-                {errors.lat && <p className="error">{errors.lat}</p>}
-                <input type="text" name="lat" placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
-                <p>,</p>
+          <div className="lat-lng">
+            <div className="lat-div">
+              Latitude
+              {errors.lat && <p className="error">{errors.lat}</p>}
+              <input className="_lat" type="text" name="lat" placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
+            </div>
+            <p className="comma-2">,</p>
 
-                {errors.lng && <p className="error">{errors.lng}</p>}
-                <input type="text" name="lng" placeholder="Longitude" value={lng} onChange={(e) => setLng(e.target.value)} />
-                </div>
-
-                <h2>Describe your place to guests</h2>
-                {errors.description && <p className="error">{errors.description}</p>}
-                <textarea name="description" placeholder="Please write at least 30 characters" value={description} onChange={(e) => setDescription(e.target.value)} />
-
-                <h2>Create a title for your spot</h2>
-                {errors.name && <p className="error">{errors.name}</p>}
-                <input type="text" name="name" placeholder="Name of your spot" value={name} onChange={(e) => setName(e.target.value)} />
-
-                <h2>Set a base price for your spot</h2>
-                <div className="price-section">
-                <p>$</p>
-                {errors.price && <p className="error">{errors.price}</p>}
-                <input type="number" name="price" placeholder="Price per night (USD)" value={price} onChange={(e) => setPrice(e.target.value)} />
-                </div>
-
-                <h2>Liven up your spot with photos</h2>
-                <p>Submit a link to at least one photo to publish your spot.</p>
-
-                <div className="images-us">
-                    {errors.previewImage && <p className="error">{errors.previewImage}</p>}
-                    {errors.image1 && <p className="error">{errors.image1}</p>}
-                    <input type="text" placeholder="Preview Image URL" value={image1} onChange={(e) => setImage1(e.target.value)} />
-
-                    {errors.image2 && <p className="error">{errors.image2}</p>}
-                    <input type="text" placeholder="Image URL" value={image2} onChange={(e) => setImage2(e.target.value)} />
-
-                    {errors.image3 && <p className="error">{errors.image3}</p>}
-                    <input type="text" placeholder="Image URL" value={image3} onChange={(e) => setImage3(e.target.value)} />
-
-                    {errors.image4 && <p className="error">{errors.image4}</p>}
-                    <input type="text" placeholder="Image URL" value={image4} onChange={(e) => setImage4(e.target.value)} />
-
-                    {errors.image5 && <p className="error">{errors.image5}</p>}
-                    <input type="text" placeholder="Image URL" value={image5} onChange={(e) => setImage5(e.target.value)} />
-                </div>
-
-                {sessionUser && <button type="submit">Create Spot</button>}
-            </form>
+            <div className="lng-div">
+              Longitude
+              {errors.lng && <p className="error">{errors.lng}</p>}
+              <input className="_lng" type="text" name="lng" placeholder="Longitude" value={lng} onChange={(e) => setLng(e.target.value)} />
+            </div>
+          </div>
         </div>
+
+        <h2>Describe your place to guests</h2>
+        {errors.description && <p className="error">{errors.description}</p>}
+        <textarea className="text-area" name="description" placeholder="Please write at least 30 characters" value={description} onChange={(e) => setDescription(e.target.value)} />
+
+        <h2>Create a title for your spot</h2>
+        {errors.name && <p className="error">{errors.name}</p>}
+        <input className="_title" type="text" name="name" placeholder="Name of your spot" value={name} onChange={(e) => setName(e.target.value)} />
+
+        <h2>Set a base price for your spot</h2>
+        <div className="price-section">
+          <p className="dollar-sign">$</p>
+          {errors.price && <p className="error">{errors.price}</p>}
+          <input className="_price" type="number" name="price" placeholder="Price per night (USD)" value={price} onChange={(e) => setPrice(e.target.value)} />
+        </div>
+
+        <h2>Liven up your spot with photos</h2>
+        <p>Submit a link to at least one photo to publish your spot.</p>
+        <div className="image-container">
+          <div className="images">
+            {errors.previewImage && <p className="error">{errors.previewImage}</p>}
+            {errors.image1 && <p className="error">{errors.image1}</p>}
+            <input type="text" placeholder="Preview Image URL" value={image1} onChange={(e) => setImage1(e.target.value)} />
+
+            {errors.image2 && <p className="error">{errors.image2}</p>}
+            <input type="text" placeholder="Image URL" value={image2} onChange={(e) => setImage2(e.target.value)} />
+
+            {errors.image3 && <p className="error">{errors.image3}</p>}
+            <input type="text" placeholder="Image URL" value={image3} onChange={(e) => setImage3(e.target.value)} />
+
+            {errors.image4 && <p className="error">{errors.image4}</p>}
+            <input type="text" placeholder="Image URL" value={image4} onChange={(e) => setImage4(e.target.value)} />
+
+            {errors.image5 && <p className="error">{errors.image5}</p>}
+            <input type="text" placeholder="Image URL" value={image5} onChange={(e) => setImage5(e.target.value)} />
+          </div>
+        </div>
+        <div className="button-box">
+
+          {sessionUser && <button type="submit" className="create-spot-button">Create Spot</button>}
+        </div>
+      </form >
+    </div >
     )
 }

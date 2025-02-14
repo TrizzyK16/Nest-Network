@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deleteASpot } from "../../store/spots";
 import { useModal } from "../../context/Modal";
+import "./DeleteSpotModal.css"
 
 export default function DeleteSpotModal({ spotId }) {
     const dispatch = useDispatch();
@@ -21,12 +22,12 @@ export default function DeleteSpotModal({ spotId }) {
             </div>
             <div className="button-containers">
                 <div className="yes-button">
-                    <button type="button" onClick={handleDelete} >
+                    <button className="delete-spot-button" type="button" onClick={handleDelete} >
                         Yes (Delete Spot)
                     </button>
                 </div>
                 <div className="No-button">
-                    <button type="button" onClick={closeModal}>
+                    <button className="keep-spot-button" type="button" onClick={closeModal}>
                         No (Keep Spot)
                     </button>
                 </div>

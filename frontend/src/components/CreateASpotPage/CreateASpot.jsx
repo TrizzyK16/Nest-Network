@@ -79,7 +79,7 @@ export default function NewSpotForm() {
 
   return (
     <div className="new-spot-container">
-      <h1 className="create-spot-header">Create a New Spot</h1>
+      <h1 className="spot-header">Create a New Spot</h1>
       <form onSubmit={handleSubmit} className="create-spot-form">
         <h2>Where is your place located?</h2>
         <p>Guests will only get your exact address once they book a reservation.</p>
@@ -103,7 +103,7 @@ export default function NewSpotForm() {
               {errors.city && <p className="error">{errors.city}</p>}
               <input className="_city" type="text" name="city" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
-            <p id="comma">,</p>
+            <p className="comma-1">,</p>
             <div className="state-div">
               State
               {errors.state && <p className="error">{errors.state}</p>}
@@ -117,7 +117,7 @@ export default function NewSpotForm() {
               {errors.lat && <p className="error">{errors.lat}</p>}
               <input className="_lat" type="text" name="lat" placeholder="Latitude" value={lat} onChange={(e) => setLat(e.target.value)} />
             </div>
-            <p id="comma">,</p>
+            <p className="comma-2">,</p>
 
             <div className="lng-div">
               Longitude
@@ -137,7 +137,7 @@ export default function NewSpotForm() {
 
         <h2>Set a base price for your spot</h2>
         <div className="price-section">
-          <p>$</p>
+          <p className="dollar-sign">$</p>
           {errors.price && <p className="error">{errors.price}</p>}
           <input className="_price" type="number" name="price" placeholder="Price per night (USD)" value={price} onChange={(e) => setPrice(e.target.value)} />
         </div>

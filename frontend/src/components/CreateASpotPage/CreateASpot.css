@@ -5,7 +5,7 @@
   }
 
 /* Centering the modal */
-.create-spot-header {
+.spot-header {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
@@ -27,19 +27,6 @@
   flex-direction: column;
 }
 
-._country {
-  width: 98%;
-  padding: 5px;
-  margin: 5px 0;
-
-}
-
-._address {
-  width: 98%;
-  padding: 5px;
-  margin: 5px 0px;
-}
-
 .city-state {
   display: flex;
   flex-direction: row;
@@ -56,17 +43,25 @@
   margin: 5px 0px;
 }
 
-#comma {
+.comma-1 {
+  width: 5px;
+  display: flex;
+  align-items: end;
+  color: red;
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.comma-2 {
   width: 5px;
   display: flex;
   align-items: end;
   color: red;
   font-size: 20px;
   margin-bottom: 0;
-  margin-right: 10px;
+  margin-left: 5px;
 }
-
-
 
 .state-div {
   display: flex;
@@ -112,35 +107,47 @@
   flex-direction: column;
 }
 
-/* Input fields */
-/* label {
+._country, ._address {
   display: flex;
-  flex-direction: column;
-  font-weight: bold;
-} */
-
-/* input {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   padding: 5px;
-  width: auto;
-  margin: 5px 0;
-} */
+  width: 100%;
+}
 
-._country, ._address, ._city, ._state, ._lat, ._lng, ._title, ._price, .images input{
+._city, ._state, ._lat, ._lng, ._title, .images input{
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   padding: 5px;
-  width: auto;
+  width: 100%;
   margin: 5px 0;
 }
+
+._price {
+  width: 100%; /* Ensure the input takes the full width of the parent */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px;
+}
+
+
 
 .price-section {
-  display: flex;
-  flex-direction: row;
+  display: flex; 
+  align-items: center;
+  width: 100%;
 }
+
+.dollar-sign {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 1%;
+}
+
+
 
 .create-spot-button {
   background-color: #ff5a5f;
