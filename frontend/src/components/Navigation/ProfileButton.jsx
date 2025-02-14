@@ -58,6 +58,7 @@ function ProfileButton({ user }) {
               <p className='ul-sub-info'>{user.email}</p>
               <div className='ul-sub-info'>
                 <Link to="/spots/session" className='manage-spots-link'>Manage Spots</Link>
+                <Link to="/reviews/current" className='manage-reviews-link'>Manage Reviews</Link>
               </div>
               <div className='ul-sub-info'>
                 <button onClick={logout} className='logout-button'>Log Out</button>
