@@ -1,0 +1,61 @@
+.mr-container {
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.title-mr {
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.review-grid-mr {
+    border: 2px solid black;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.review-card-mr {
+    border: 2px solid black;
+    padding: 10px;
+    width: 300px;
+}
+
+.review-spot-name-mr {
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.review-createdAt-mr {
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.review-desc-mr {
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.review-card-buttons-mr {
+    border: 2px solid black;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-card-buttons-mr div {
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.update-button-mr {
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.delete-review-button-mr {
+    border: 2px solid black;
+    padding: 5px;
+}
+

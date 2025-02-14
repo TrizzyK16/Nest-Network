@@ -11,8 +11,8 @@ export default function UpdateSpot() {
   const navigate = useNavigate();
   const { spotId } = useParams();
 
-  const sessionUser = useSelector((state) => state.session.user);
-  const spot = useSelector(state => state.spots.spotDetails)
+  const sessionUser = useSelector((state) => state?.session.user);
+  const spot = useSelector(state => state?.spots?.spotDetails)
 
   const [address, setAddress] = useState(spot.address)
   const [city, setCity] = useState(spot.city)
@@ -62,8 +62,6 @@ export default function UpdateSpot() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updatedSpot = {id: spotId, country, address, city, state, lat, lng, description, name, price}
-        console.log("ID:", spotId)
-        console.log('SpotData:', updatedSpot)
         if(!validateForm()){
         return
         }
