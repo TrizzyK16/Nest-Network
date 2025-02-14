@@ -8,13 +8,17 @@ import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './Navigation.css';
 import { FaBars } from 'react-icons/fa';
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import logo from './images/logo.png';
+import * as sessionActions from '../../store/session'
+
 
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
   const navRef = useRef(null);
+  const dispatch = useDispatch()
 
   const toggleMenu = () => setShowMenu((prev) => !prev);
   const closeMenu = () => setShowMenu(false);
@@ -34,6 +38,13 @@ function Navigation({ isLoaded }) {
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showMenu]);
+
+  const logout = (e) => {
+      e.preventDefault();
+      dispatch(sessionActions.logout());
+      closeMenu();
+      window.location.href = '/';
+    };
 
   return (
 
