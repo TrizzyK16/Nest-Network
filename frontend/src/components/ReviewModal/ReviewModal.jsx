@@ -8,19 +8,22 @@ export default function ReviewModal({ spotId, onClose }) {
   const sessionUser = useSelector((state) => state.session.user);
   const reviewers = useSelector((state) => state?.reviews?.review?.Reviews);
   const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const [errors, setErrors] = useState([]);
 
   const handleStarClick = (value) => setRating(value);
+
+  const handleStarHover = (value) => setHoverRating(value);
 
   const handleSubmit = async () => {
     const validationErrors = [];
 
     reviewers.forEach(review => {
       if (review.userId === sessionUser.id) {
-        validationErrors.push("Review already exists for this spot")
+        validationErrors.push("Review already exists for this spot");
       }
-  })
+    });
 
     if (sessionUser.id === 4) {
       validationErrors.push("Cannot post a review as a demo user");
@@ -49,6 +52,8 @@ export default function ReviewModal({ spotId, onClose }) {
     }
   };
 
+  const isSubmitDisabled = reviewText.trim().length < 10 || rating === 0;
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -66,8 +71,10 @@ export default function ReviewModal({ spotId, onClose }) {
           {[1, 2, 3, 4, 5].map((star) => (
             <span
               key={star}
-              className={star <= rating ? "star filled" : "star"}
+              className={`star ${star <= (hoverRating || rating) ? "filled" : ""}`}
               onClick={() => handleStarClick(star)}
+              onMouseOver={() => handleStarHover(star)}
+              onMouseOut={() => setHoverRating(0)}
             >
               ★
             </span>
@@ -81,7 +88,9 @@ export default function ReviewModal({ spotId, onClose }) {
         />
 
         <div className="modal-buttons">
-          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleSubmit} disabled={isSubmitDisabled}>
+            Submit
+          </button>
         </div>
       </div>
     </div>

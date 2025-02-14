@@ -68,9 +68,9 @@ function LoginFormModal() {
       <p className='error-message'>{errors.general}</p>
       <form onSubmit={handleSubmit} className='submit-form'>
         <label className='input-label'>
-          Username or Email
           <input
             className='user-input'
+            placeholder='Username or Email'
             type="text"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
@@ -78,9 +78,9 @@ function LoginFormModal() {
           />
         </label>
         <label className='input-label'>
-          Password
           <input
             className='password-input'
+            placeholder='Password'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -91,9 +91,14 @@ function LoginFormModal() {
           <p className='error-message'>{errors.credential}</p>
         )}
         <div className='login-button-div'>
-          <button type="submit" className='login-button'>Log In</button>
+          <button 
+            type="submit" 
+            className='login-button'
+            disabled={credential.length < 4 || password.length < 6}>
+              Log In
+          </button>
         </div>
-        <div className='demo-user-button'>
+        <div className='demo-button-div'>
           <button type="button" onClick={handleDemoLogin} className='demo-button'>Demo User</button>
         </div>
       </form>

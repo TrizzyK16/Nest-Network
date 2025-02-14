@@ -1,0 +1,58 @@
+/* DeleteReviewModal.css */
+
+/* Modal Content */
+.header,
+.text,
+.button-containers {
+    text-align: center; /* Center the text inside the divs */
+  }
+  
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px; /* Set a max width for the modal content */
+    text-align: center; /* Center the text inside the modal content */
+  }
+  
+.button-containers {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons horizontally */
+    margin-top: 20px; /* Add some space above the buttons */
+    margin-bottom: 10px;
+  }
+  
+.delete-review-button {
+    color: white;
+    background-color: #ff5a5f;
+    width: 290px;
+    height: auto;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.delete-review-button:hover {
+    background-color: #e0484d;
+}
+
+.keep-review-button {
+    color: white;
+    background-color: grey;
+    width: 290px;
+    height: auto;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+}
+
+.keep-review-button:hover {
+    background-color: rgb(105, 102, 102);
+}

@@ -29,13 +29,18 @@
     cursor: pointer;
   }
   
-  .filled {
+  .star.filled {
     color: gold;
   }
-  
+
   .modal-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 10px;
+  }
+
+  .modal-buttons button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
   

@@ -28,7 +28,7 @@ export default function Reviews({spotId}) {
           {review?.User?.id === sessionUser?.id && (
             <div className="delete-container">
               <OpenModalButton
-                buttonText='delete'
+                buttonText='Delete'
                 modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId}/>}
               />
             </div>

@@ -2,7 +2,7 @@
 .login-text {
   text-align: center;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .submit-form {
@@ -50,9 +50,15 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
-  width: 85px;
+  width: 100%;
+  border: 2px solid black;
+  box-shadow: 2px 2px black;
 }
 
+.login-button-div, .demo-button-div {
+  display: flex;
+  justify-content: center;
+}
 
 /* .log-in-button {
   padding: 10px;
@@ -68,6 +74,8 @@
 .login-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  color: #666;
+  opacity: 0.6;
 }
 
 .demo-button:hover {
