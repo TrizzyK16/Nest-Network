@@ -13,9 +13,13 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up(queryInterface, Sequelize) {
     // Check if DemoUser already exists
-    const [existingDemoUser] = await queryInterface.sequelize.query(
-      `SELECT * FROM users WHERE username = 'DemoUser';`
-    );
+    const tableName = process.env.NODE_ENV === 'production' && process.env.SCHEMA 
+    ? `"${process.env.SCHEMA}"."Users"` 
+    : "Users";
+  
+  const [existingDemoUser] = await queryInterface.sequelize.query(
+    `SELECT * FROM ${tableName} WHERE username = 'DemoUser';`
+  );
 
     if (existingDemoUser.length === 0) {
       // If DemoUser does not exist, insert the user
@@ -55,7 +59,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = 'users';
+    options.tableName = "Users";
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
       username: { [Op.in]: ['Demo-lition1', 'Demo-lition2', 'Demo-lition3', 'DemoUser'] }
