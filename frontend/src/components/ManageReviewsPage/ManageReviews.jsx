@@ -9,7 +9,7 @@ import UpdateReviewModal from '../UpdateReviewModal/UpdateReviewModal'
 export default function ManageReviews(){
     const reviews = useSelector(state => state?.reviews?.userReviews?.Reviews)
     const dispatch = useDispatch()
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [ setIsModalOpen] = useState(false);
 
     useEffect(()=> {
         dispatch(getUsersReviews())
