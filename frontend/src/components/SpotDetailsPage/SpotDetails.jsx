@@ -11,9 +11,9 @@ import './SpotDetails.css';
 
 export default function SpotDetails() {
   const { spotId } = useParams();
-  const spot = useSelector(state => state.spots.spotDetails);
+  const spot = useSelector(state => state?.spots?.spotDetails);
   const reviews = useSelector(state => state?.reviews?.review?.Reviews)
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state?.session?.user);
   const dispatch = useDispatch();
 
   // State to control the modal
@@ -48,22 +48,22 @@ export default function SpotDetails() {
   return (
     <div className="container-sd">
       <div className="gen-info-container">
-        <h1 className="spot-title">{spot.name}</h1>
-        <h2 className="location">{spot.city}, {spot.state}, {spot.country}</h2>
+        <h1 className="spot-title">{spot?.name}</h1>
+        <h2 className="location">{spot?.city}, {spot?.state}, {spot?.country}</h2>
       </div>
       <div className="spotImages">
         <div className="main-image">
-          {spot.SpotImages && spot.SpotImages.length > 0 && (
+          {spot.SpotImages && spot?.SpotImages.length > 0 && (
             (() => {
-              const previewImage = spot.SpotImages.find(image => image.preview === true);
-              return previewImage ? <img src={previewImage.url} alt="Main Spot Preview" /> : <p>No preview image available</p>;
+              const previewImage = spot?.SpotImages.find(image => image.preview === true);
+              return previewImage ? <img src={previewImage?.url} alt="Main Spot Preview" /> : <p>No preview image available</p>;
             })()
           )}
         </div>
         <div className="other-images">
-          {spot.SpotImages && spot.SpotImages.length > 0 &&
-            spot.SpotImages.filter(image => !image.preview).map((image, index) => (
-              <img key={index} src={image.url} alt={`Spot image ${index}`} />
+          {spot?.SpotImages && spot?.SpotImages.length > 0 &&
+            spot?.SpotImages.filter(image => !image?.preview).map((image, index) => (
+              <img key={index} src={image?.url} alt={`Spot image ${index}`} />
             ))
           }
         </div>
@@ -71,20 +71,20 @@ export default function SpotDetails() {
       <div className="info-container">
         <div className="host-and-description">
           <div className="hosted-by-info">
-            <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+            <h2>Hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}</h2>
           </div>
           <div className="spotDescription">
-            <p>{spot.description}</p>
+            <p>{spot?.description}</p>
           </div>
         </div>
         <div className="booking-container">
           <div className="price-review">
             <div className="pricing">
-              <h3>${spot.price} night</h3>
+              <h3>${spot?.price} night</h3>
             </div>
             <div className="review-info">
-              {spot.numReviews > 0 ? (
-                <span>⭐ {spot.avgRating} · {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
+              {spot?.numReviews > 0 ? (
+                <span>⭐ {spot?.avgRating} · {spot?.numReviews} {spot?.numReviews === 1 ? "review" : "reviews"}</span>
               ) : (
                 <span>⭐ New</span>
               )}
@@ -98,13 +98,13 @@ export default function SpotDetails() {
       <div className="reviews-container">
         <div className="large-review-info">
           {spot.numReviews > 0 ? (
-            <span>⭐ {spot.avgRating} · {spot.numReviews} {spot.numReviews === 1 ? "review" : "reviews"}</span>
+            <span>⭐ {spot?.avgRating} · {spot?.numReviews} {spot?.numReviews === 1 ? "review" : "reviews"}</span>
           ) : (
             <span>⭐ New</span>
           )}
         </div>
         <div className="review-button">
-          {sessionUser && sessionUser.id !== spot.ownerId && (
+          {sessionUser && sessionUser?.id !== spot?.ownerId && (
             <button onClick={handleReviewClick}>Post Your Review</button>
           )}
           {isModalOpen && <ReviewModal spotId={spotId} onClose={handleCloseModal} onSubmit={handleSubmitReview} />}
