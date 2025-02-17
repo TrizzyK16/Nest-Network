@@ -23,7 +23,7 @@ module.exports = {
 
     if (existingDemoUser.length === 0) {
       // If DemoUser does not exist, insert the user
-      await User.bulkCreate([
+      return User.bulkCreate([
         {
           email: 'demo1@user.io',
           username: 'Demo-lition1',
