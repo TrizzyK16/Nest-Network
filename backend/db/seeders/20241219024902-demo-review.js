@@ -13,23 +13,23 @@ module.exports = {
       {
         userId: 1,
         spotId: 1,
-        review: "Great spot, had a wonderful time!",
+        review: "Absolutely loved this place! Highly recommended.",
         stars: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        userId: 1,
+        userId: 2,
         spotId: 1,
-        review: "Great spot, had a wonderful time!",
+        review: "Nice spot but a bit noisy at night.",
         stars: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        userId: 1,
+        userId: 3,
         spotId: 1,
-        review: "Great spot, had a wonderful time!",
+        review: "Good experience but room for improvement.",
         stars: 3,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -51,21 +51,19 @@ module.exports = {
         updatedAt: new Date(),
       },
     ], { validate: true });
-
-   
   },
 
   down: async (queryInterface, Sequelize) => {
     options.tableName = "Reviews";
     const Op = Sequelize.Op;
-    await queryInterface.bulkDelete(options, {
-      review: {
-        [Op.in]: [
-          "Great spot, had a wonderful time!",
-          "Decent place, but could use some improvements.",
-          "Not as expected. Will not return.",
-        ]
-      },
+    return queryInterface.bulkDelete(options, {
+      [Op.or]: [
+        { userId: 1, spotId: 1 },
+        { userId: 2, spotId: 1 },
+        { userId: 3, spotId: 1 },
+        { userId: 2, spotId: 2 },
+        { userId: 3, spotId: 3 }
+      ]
     });
   },
 };

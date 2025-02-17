@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
     return ReviewImage.bulkCreate([
       {
         reviewId: 1,
@@ -35,16 +34,21 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ]);
-
+    ], { validate: true });
   },
 
   down: async (queryInterface, Sequelize) => {
     options.tableName = 'ReviewImages';
     const Op = Sequelize.Op;
-    await queryInterface.bulkDelete(options, {
+    return queryInterface.bulkDelete(options, {
       url: {
-        [Op.in]: ['https://example.com/image1.jpg', 'https://example.com/image2.jpg', 'https://example.com/image3.jpg', 'https://example']}
-    })
+        [Op.in]: [
+          'https://example.com/image1.jpg',
+          'https://example.com/image2.jpg',
+          'https://example.com/image3.jpg',
+          'https://example.com/image4.jpg'
+        ]
+      }
+    });
   }
 };
